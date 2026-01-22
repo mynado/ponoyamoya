@@ -21,12 +21,6 @@ export default function Button({
     tertiary: "bg-transparent text-spiritblue border-none",
   };
   return (
-    // <button
-    //   className={`${typeSettings[typeStyle]} ${className} py-3 px-6 font-medium rounded-lg cursor-pointer disabled:opacity-80 disabled:cursor-not-allowed hover:opacity-90 transition-all duration-200 ease-in-out flex items-center justify-center`}
-    //   {...rest}
-    // >
-    //   {children}
-    // </button>
     <button
       className={clsx(
         typeSettings[typeStyle],
