@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Button from "./Button";
 import Image from "next/image";
-import { Close } from "@/icons";
+import { Close } from "../../icons";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,23 +12,6 @@ export default function Header() {
   };
   return (
     <header className="bg-white shadow">
-      {/* <nav className="container mx-auto flex justify-between items-center">
-        <div className="text-2xl font-bold">Ponoyamoya</div>
-        <ul className="flex gap-6 text-gray-700">
-          <li>
-            <Link href="/">Home</Link>
-          </li>
-          <li>
-            <Link href="/about">About</Link>
-          </li>
-          <li>
-            <Link href="/journal">Journal</Link>
-          </li>
-          <li>
-            <Link href="/contact">Contact</Link>
-          </li>
-        </ul>
-      </nav> */}
       <nav
         className={`w-full flex flex-col items-center justify-center pr-0 pl-4 sm:pr-4 fixed top-0 bg-white/80 backdrop-blur-xs z-50`}
       >
