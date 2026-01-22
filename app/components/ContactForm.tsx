@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Button from "@/components/Button";
-// import emailjs from "@emailjs/browser";
-// import { Button, Dropdown, Input, TextArea, InlineError } from "components";
+import Dropdown from "@/components/Dropdown";
+import Input from "@/components/Input";
+import TextArea from "@/components/TextArea";
+import InlineError from "@/components/InlineError";
 // import LoadingSpinner from "./loading-spinner/LoadingSpinner";
 
 type FormField = { value: string; isError: boolean };
@@ -16,7 +18,6 @@ type FormData = {
 };
 
 export default function ContactForm() {
-  const form = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState<FormData>({
     reason: { value: "", isError: false },
     other: { value: "", isError: false },
@@ -62,37 +63,48 @@ export default function ContactForm() {
 
   const onCloseSuccessMessage = () => setShowSuccessMessage(false);
 
-  const sendEmail = () => {
-    if (!form.current) return;
-    // emailjs
-    //   .sendForm(
-    //     process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID!,
-    //     process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE_ID!,
-    //     form.current,
-    //     { publicKey: process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY! }
-    //   )
-    //   .then(
-    //     () => {
-    //       setIsSuccess(true);
-    //       setIsSending(false);
-    //       setShowSuccessMessage(true);
-    //     },
-    //     () => {
-    //       setIsError(true);
-    //       setIsSending(false);
-    //     }
-    //   );
-  };
-
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSending(true);
-    const isValid = Object.values(formData).every((f) => !f.isError);
-    if (isValid) sendEmail();
-    else {
+
+    const isValid = Object.values(formData).every(
+      (f) => !f.isError && f.value.trim() !== "",
+    );
+    if (!isValid) {
       setIsError(true);
+      return;
+    }
+
+    setIsSending(true);
+    setIsError(false);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          reason: formData.reason.value,
+          other: formData.other.value,
+          name: formData.name.value,
+          email: formData.email.value,
+          message: formData.message.value,
+        }),
+      });
+
+      if (!res.ok) throw new Error("Failed to send message");
+
+      setIsSuccess(true);
+      setShowSuccessMessage(true);
+      setFormData({
+        reason: { value: "", isError: false },
+        other: { value: "", isError: false },
+        name: { value: "", isError: false },
+        email: { value: "", isError: false },
+        message: { value: "", isError: false },
+      });
+    } catch (error) {
+      setIsError(true);
+    } finally {
       setIsSending(false);
-      setIsSuccess(false);
     }
   };
 
@@ -110,19 +122,18 @@ export default function ContactForm() {
         </div>
       )}
 
-      <form
-        ref={form}
-        onSubmit={onSubmit}
-        className="flex flex-col gap-4 w-full"
-      >
-        {/* <Dropdown
+      <form onSubmit={onSubmit} className="flex flex-col gap-4 w-full">
+        <Dropdown
           id="reason"
           name="reason"
           value={formData.reason.value}
           onChange={onOptionChange}
           dropdownOptions={dropdownOptions}
           labelText="Reason for contact"
-          error={{ isError: formData.reason.isError, message: "Please select a reason." }}
+          error={{
+            isError: formData.reason.isError,
+            message: "Please select a reason.",
+          }}
           required
         />
         {formData.reason.value === "Other" && (
@@ -133,7 +144,10 @@ export default function ContactForm() {
             onChange={onInputChange}
             labelText="Specify reason"
             required
-            error={{ isError: formData.other.isError, message: "Please provide a reason." }}
+            error={{
+              isError: formData.other.isError,
+              message: "Please provide a reason.",
+            }}
           />
         )}
         <div className="flex flex-col sm:flex-row gap-4">
@@ -144,7 +158,10 @@ export default function ContactForm() {
             onChange={onInputChange}
             labelText="Name"
             required
-            error={{ isError: formData.name.isError, message: "Name is required." }}
+            error={{
+              isError: formData.name.isError,
+              message: "Name is required.",
+            }}
           />
           <Input
             id="email"
@@ -154,7 +171,10 @@ export default function ContactForm() {
             labelText="Email"
             type="email"
             required
-            error={{ isError: formData.email.isError, message: "Invalid email." }}
+            error={{
+              isError: formData.email.isError,
+              message: "Invalid email.",
+            }}
           />
         </div>
         <TextArea
@@ -169,14 +189,18 @@ export default function ContactForm() {
             message: "Please add more details to your message.",
           }}
           minLength={10}
-        /> */}
+        />
 
         <Button disabled={isSending || isSuccess}>
-          {/* {isSending ? <LoadingSpinner width={20} height={20} className="invert" /> : "Send"} */}
-          Send
+          {isSending ? "Sending..." : "Send"}
+          {/* <LoadingSpinner width={20} height={20} className="invert" />  */}
         </Button>
 
-        {/* {isError && <InlineError>There was an error sending your message. Please try again.</InlineError>} */}
+        {isError && (
+          <InlineError>
+            There was an error sending your message. Please try again.
+          </InlineError>
+        )}
       </form>
     </div>
   );
