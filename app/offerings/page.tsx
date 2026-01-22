@@ -1,8 +1,5 @@
-// app/offerings/page.tsx
 import { PortableText } from "@portabletext/react";
 import { getOfferings, getPage } from "@/lib/sanity/queries";
-
-// import Heading from "@/components/Heading";
 import PaginatedContent from "@/components/PaginatedContent";
 import Events from "@/components/Events";
 import FlipCard from "@/components/FlipCard";
@@ -28,11 +25,11 @@ export default async function OfferingsPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-8 mt-16 p-4">
-      {/* <Heading> */}
-      <h1 className="text-center mb-4">{page?.heading}</h1>
-      {page?.content && <PortableText value={page.content} />}
-      {/* </Heading> */}
+    <div className="flex flex-col items-center justify-center gap-8 mt-16">
+      <div className="max-w-(--breakpoint-md) mx-auto w-full px-4">
+        <h1 className="text-center mb-4">{page?.heading}</h1>
+        {page?.content && <PortableText value={page.content} />}
+      </div>
 
       <div className="flex flex-col md:flex-row flex-wrap items-center justify-center gap-4 max-w-[var(--breakpoint-xl)] w-full">
         {offerings.map((offering) => (

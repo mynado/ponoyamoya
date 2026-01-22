@@ -24,14 +24,16 @@ export default async function ContactPage() {
   const pageData = await getPage("Contact");
 
   return (
-    <div className="mt-16 flex flex-col w-full items-center justify-center gap-4 p-4">
-      <h1 className="text-center mb-4">{pageData?.heading || "Contact"}</h1>
-      {pageData?.content && (
-        <PortableText
-          value={pageData.content}
-          components={portableTextComponents}
-        />
-      )}
+    <div className="mt-16 flex flex-col w-full items-center justify-center gap-4">
+      <div className="max-w-(--breakpoint-md) mx-auto w-full px-4">
+        <h1 className="text-center mb-4">{pageData?.heading || "Contact"}</h1>
+        {pageData?.content && (
+          <PortableText
+            value={pageData.content}
+            components={portableTextComponents}
+          />
+        )}
+      </div>
       <div className="max-w-(--breakpoint-md) mx-auto w-full mt-8 px-4">
         <ContactForm />
       </div>
