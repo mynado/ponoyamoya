@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Button from "./Button";
 import Image from "next/image";
-import { Close } from "../../icons";
+// import { Close } from "../../icons";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,7 +50,7 @@ export default function Header() {
               className="text-white"
             >
               <Image
-                src={Close}
+                src={"/icons/close.svg"}
                 alt="Close"
                 width={24}
                 height={24}
