@@ -1,6 +1,9 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import Button from "./Button";
+import Image from "next/image";
+import { Close } from "@/icons";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,9 +39,9 @@ export default function Header() {
             </div>
           </Link>
           <div className="sm:hidden nav-link">
-            {/* <Button typeStyle="tertiary" onClick={toggleMenu}>
+            <Button typeStyle="tertiary" onClick={toggleMenu}>
               <span className="font-bold text-spiritblue">MENU</span>
-            </Button> */}
+            </Button>
           </div>
           <ul className="hidden sm:flex sm:gap-4 sm:py-2 nav-link">
             <li>
@@ -58,19 +61,19 @@ export default function Header() {
         >
           <div className="w-full flex justify-end">
             {" "}
-            {/* <Button
+            <Button
               onClick={toggleMenu}
               typeStyle="tertiary"
               className="text-white"
             >
-              <img
+              <Image
                 src={Close}
                 alt="Close"
                 width={24}
                 height={24}
                 className="invert"
               />
-            </Button> */}
+            </Button>
           </div>
           <ul className="flex flex-col gap-4 p-4 items-end text-white">
             <li>
