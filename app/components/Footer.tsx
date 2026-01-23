@@ -1,16 +1,12 @@
 "use client";
 
-// import { FlowerBlue } from 'assets/icons'
+import FlowerBlue from "@/icons/flower-blue";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="flex flex-col items-center w-full justify-center gap-4 p-4">
-      {/* <img
-        src={FlowerBlue}
-        alt="Blue Queen Anne's Lace Illustration"
-        width={60}
-      /> */}
+      <FlowerBlue className="w-20 h-20 opacity-30" />
       <div className="flex flex-col-reverse justify-center items-center md:flex-row md:justify-between w-full">
         <div className="w-[85px]"></div>
         <div>{currentYear} &copy; ponoyamoya.com</div>
