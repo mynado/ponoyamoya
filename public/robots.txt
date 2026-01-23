@@ -1,0 +1,9 @@
+# Allow all search engines to crawl main pages
+User-agent: *
+Disallow: /api/
+
+# Optional: sitemap for better indexing
+Sitemap: https://www.ponoyamoya.com/sitemap.xml
+
+# Optional: polite crawling
+# Crawl-delay: 10
