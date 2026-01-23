@@ -51,8 +51,11 @@ export default function FlipCard({
           >
             {title}
           </h2>
-
-          {/* <BgIcon className="absolute inset-0 w-full h-full opacity-40" /> */}
+          <div className="absolute inset-0 w-full h-full opacity-40 grid gap-0" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(80px, 1fr))" }}>
+            {Array.from({ length: 24 }).map((_, i) => (
+              <BgIcon key={i} className="w-full h-full" />
+            ))}
+          </div>
         </div>
 
         {/* Back */}

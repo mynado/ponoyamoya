@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Button from "./Button";
 import Image from "next/image";
-// import { Close } from "../../icons";
+import Close from "@/icons/close";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,15 +47,9 @@ export default function Header() {
             <Button
               onClick={toggleMenu}
               typeStyle="tertiary"
-              className="text-white"
+              className="text-white p-3"
             >
-              <Image
-                src={"/icons/close.svg"}
-                alt="Close"
-                width={24}
-                height={24}
-                className="invert"
-              />
+              <Close className="w-8 h-8 invert" width={20} height={20} />
             </Button>
           </div>
           <ul className="flex flex-col gap-4 p-4 items-end text-white">

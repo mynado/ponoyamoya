@@ -3,9 +3,9 @@ import { getOfferings, getPage } from "@/lib/sanity/queries";
 import PaginatedContent from "@/components/PaginatedContent";
 import Events from "@/components/Events";
 import FlipCard from "@/components/FlipCard";
-import FlowerBlue from "@/icons/flower.svg";
-import FlowerRed from "@/icons/flower-red.svg";
-import FlowerYellow from "@/icons/flower-yellow.svg";
+import FlowerBlue from "@/icons/flower-blue";
+import FlowerRed from "@/icons/flower-red";
+import FlowerYellow from "@/icons/flower-yellow";
 
 export const revalidate = 60;
 type FlowerIcon = "blue" | "red" | "yellow";

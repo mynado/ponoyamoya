@@ -2,7 +2,7 @@
 
 import { ReactNode, useState, useRef, useLayoutEffect } from "react";
 import Button from "./Button";
-import Chevron from "@/icons/chevron.svg";
+import Chevron from "@/icons/chevron";
 
 interface PaginatedContentProps {
   children: ReactNode[];
@@ -54,8 +54,7 @@ export default function PaginatedContent({ children }: PaginatedContentProps) {
       {pages > 1 && (
         <div className="absolute bottom-2 left-0 right-0 flex items-center justify-center gap-4 rounded-lg">
           <Button typeStyle="tertiary" onClick={prevPage} className="p-2">
-            {/* <Chevron className="rotate-180 w-8 h-8" /> */}
-            {"<"}
+            <Chevron className="rotate-180 w-8 h-8" />
           </Button>
 
           <span className="text-sm font-semibold">
@@ -63,8 +62,7 @@ export default function PaginatedContent({ children }: PaginatedContentProps) {
           </span>
 
           <Button typeStyle="tertiary" onClick={nextPage} className="p-2">
-            {/* <Chevron className="w-8 h-8" /> */}
-            {">"}
+            <Chevron className="w-8 h-8" />
           </Button>
         </div>
       )}
