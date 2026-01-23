@@ -1,14 +1,7 @@
 "use client";
 import { useState } from "react";
+import InlineError from "@/components/InlineError";
 
-type DropdownProps = {
-  dropdownOptions?: DropdownOptions;
-  labelText?: string;
-  className?: string;
-  error: { message: string; isError: boolean };
-} & React.SelectHTMLAttributes<HTMLSelectElement>;
-
-type DropdownOptions = DropdownOption[];
 type DropdownOption = {
   value: string;
   label: string;
@@ -16,38 +9,64 @@ type DropdownOption = {
   hidden?: boolean;
 };
 
+type DropdownProps = {
+  dropdownOptions?: DropdownOption[];
+  labelText?: string;
+  className?: string;
+  error?: { message: string; isError: boolean };
+} & React.SelectHTMLAttributes<HTMLSelectElement>;
+
 export default function Dropdown({
   dropdownOptions = [],
-  labelText = "",
+  labelText,
   className = "",
   error = { message: "", isError: false },
   ...rest
 }: DropdownProps) {
   const [isDirty, setIsDirty] = useState(false);
-  const handleBlur = () => {
-    setIsDirty(true);
-  };
+
+  const showError = isDirty && error.isError;
+  const showValid = isDirty && !error.isError && rest.value;
+
   return (
-    <div>
-      <label htmlFor={rest.name}>{labelText}</label>
+    <div className="w-full">
+      {labelText && (
+        <label htmlFor={rest.id} className="block mb-1">
+          {labelText}
+        </label>
+      )}
+
       <select
-        className={`bg-white border-spiritblue border-2 rounded-md w-full mt-2 h-9 px-1 ${className} ${isDirty ? "invalid:border-red-600 valid:border-green-600" : ""}`}
         {...rest}
-        onBlur={handleBlur}
-        required
+        onBlur={() => setIsDirty(true)}
+        aria-invalid={error.isError}
+        className={`
+          bg-white
+          border-2
+          rounded-md
+          w-full
+          h-9
+          px-2
+          transition-colors
+          ${showError ? "border-red-600" : ""}
+          ${showValid ? "border-green-600" : "border-spiritblue"}
+          ${className}
+        `}
       >
         {dropdownOptions.map((option) => (
           <option
             key={option.value}
             value={option.value}
-            className="px-0 disabled:text-slate-600"
             disabled={option.disabled}
             hidden={option.hidden}
+            className="disabled:text-slate-600"
           >
             {option.label}
           </option>
         ))}
       </select>
+
+      {error.isError && isDirty && <InlineError>{error.message}</InlineError>}
     </div>
   );
 }

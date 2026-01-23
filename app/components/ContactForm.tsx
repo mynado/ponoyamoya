@@ -6,7 +6,7 @@ import Dropdown from "@/components/Dropdown";
 import Input from "@/components/Input";
 import TextArea from "@/components/TextArea";
 import InlineError from "@/components/InlineError";
-// import LoadingSpinner from "./loading-spinner/LoadingSpinner";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 type FormField = { value: string; isError: boolean };
 type FormData = {
@@ -61,14 +61,16 @@ export default function ContactForm() {
     setIsError(false);
   };
 
-  const onCloseSuccessMessage = () => setShowSuccessMessage(false);
+  const onCloseSuccessMessage = () => {
+    setShowSuccessMessage(false);
+    setIsSuccess(false);
+  };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const isValid = Object.values(formData).every(
-      (f) => !f.isError && f.value.trim() !== "",
-    );
+    const isValid = Object.values(formData).every((field) => !field.isError);
+    console.log("Form validation result:", isValid);
     if (!isValid) {
       setIsError(true);
       return;
@@ -78,6 +80,7 @@ export default function ContactForm() {
     setIsError(false);
 
     try {
+      console.log("Attempting to send form data to /api/contact");
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -94,6 +97,7 @@ export default function ContactForm() {
 
       setIsSuccess(true);
       setShowSuccessMessage(true);
+      setIsError(false);
       setFormData({
         reason: { value: "", isError: false },
         other: { value: "", isError: false },
@@ -102,8 +106,10 @@ export default function ContactForm() {
         message: { value: "", isError: false },
       });
     } catch (error) {
+      console.error("Error submitting form:", error);
       setIsError(true);
     } finally {
+      console.log("Finished submission attempt");
       setIsSending(false);
     }
   };
@@ -122,7 +128,11 @@ export default function ContactForm() {
         </div>
       )}
 
-      <form onSubmit={onSubmit} className="flex flex-col gap-4 w-full">
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        className="flex flex-col gap-4 w-full"
+      >
         <Dropdown
           id="reason"
           name="reason"
@@ -131,7 +141,7 @@ export default function ContactForm() {
           dropdownOptions={dropdownOptions}
           labelText="Reason for contact"
           error={{
-            isError: formData.reason.isError,
+            isError: !isSuccess && formData.reason.isError,
             message: "Please select a reason.",
           }}
           required
@@ -145,7 +155,7 @@ export default function ContactForm() {
             labelText="Specify reason"
             required
             error={{
-              isError: formData.other.isError,
+              isError: !isSuccess && formData.other.isError,
               message: "Please provide a reason.",
             }}
           />
@@ -159,7 +169,7 @@ export default function ContactForm() {
             labelText="Name"
             required
             error={{
-              isError: formData.name.isError,
+              isError: !isSuccess && formData.name.isError,
               message: "Name is required.",
             }}
           />
@@ -172,7 +182,7 @@ export default function ContactForm() {
             type="email"
             required
             error={{
-              isError: formData.email.isError,
+              isError: !isSuccess && formData.email.isError,
               message: "Invalid email.",
             }}
           />
@@ -185,18 +195,26 @@ export default function ContactForm() {
           labelText="Message"
           required
           error={{
-            isError: formData.message.isError,
+            isError: !isSuccess && formData.message.isError,
             message: "Please add more details to your message.",
           }}
           minLength={10}
         />
 
         <Button disabled={isSending || isSuccess}>
-          {isSending ? "Sending..." : "Send"}
-          {/* <LoadingSpinner width={20} height={20} className="invert" />  */}
+          {isSending ? (
+            <LoadingSpinner
+              width={20}
+              height={20}
+              className="invert"
+              alt="Loading..."
+            />
+          ) : (
+            "Send"
+          )}
         </Button>
 
-        {isError && (
+        {isError && !isSuccess && (
           <InlineError>
             There was an error sending your message. Please try again.
           </InlineError>

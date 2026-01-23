@@ -18,11 +18,26 @@ export default function TextArea({
   const handleBlur = () => {
     setIsDirty(true);
   };
+  const showError = isDirty && error.isError;
+  const showValid = isDirty && !error.isError && rest.value;
   return (
     <div>
       <label htmlFor={rest.id}>{labelText}</label>
       <textarea
-        className={`bg-white border border-spiritblue border-2 rounded-md placeholder:text-slate-600 w-full min-h-[200px] p-2 ${className} ${isDirty ? "invalid:border-red-600 valid:border-green-600" : ""} `}
+        className={`
+          bg-white 
+          border 
+          border-spiritblue 
+          border-2 
+          rounded-md 
+          placeholder:text-slate-600 
+          w-full 
+          min-h-[200px] 
+          p-2
+          ${showError ? "border-red-600" : ""}
+          ${showValid ? "border-green-600" : "border-spiritblue"} 
+          ${className} 
+          `}
         {...rest}
         onBlur={handleBlur}
       />

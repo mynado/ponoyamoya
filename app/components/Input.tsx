@@ -5,28 +5,45 @@ import InlineError from "@/components/InlineError";
 type InputProps = {
   labelText?: string;
   className?: string;
-  error: { message: string; isError: boolean };
+  error?: { message: string; isError: boolean };
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 export default function Input({
-  labelText = "",
+  labelText,
   className = "",
   error = { message: "", isError: false },
   ...rest
 }: InputProps) {
   const [isDirty, setIsDirty] = useState(false);
 
-  const handleBlur = () => {
-    setIsDirty(true);
-  };
+  const showError = isDirty && error.isError;
+  const showValid = isDirty && !error.isError && rest.value;
+
   return (
     <div className="w-full">
-      {labelText && <label htmlFor={rest.id}>{labelText}</label>}
+      {labelText && (
+        <label htmlFor={rest.id} className="block mb-1">
+          {labelText}
+        </label>
+      )}
+
       <input
-        className={`bg-white border-spiritblue border-2 rounded-md px-2 py-1 w-full placeholder:text-slate-600 ${className} ${isDirty ? "invalid:border-red-600 valid:border-green-600" : ""} `}
         {...rest}
-        onBlur={handleBlur}
+        onBlur={() => setIsDirty(true)}
+        aria-invalid={error.isError}
+        className={`
+          bg-white
+          border-2
+          rounded-md
+          px-2 py-1
+          w-full
+          transition-colors
+          ${showError ? "border-red-600" : ""}
+          ${showValid ? "border-green-600" : "border-spiritblue"}
+          ${className}
+        `}
       />
+
       {error.isError && isDirty && <InlineError>{error.message}</InlineError>}
     </div>
   );
