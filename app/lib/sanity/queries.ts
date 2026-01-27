@@ -39,3 +39,21 @@ export async function getJournalPostBySlug(
       : undefined,
   );
 }
+
+export async function getAllJournalPosts(
+  isEnabled: boolean,
+): Promise<JournalPostData[]> {
+  const client = isEnabled ? sanityClientWithToken : sanityClient;
+
+  return client.fetch(
+    `*[_type == "journalPost"] | order(publishedAt desc)`,
+    {},
+    isEnabled
+      ? {
+          perspective: "drafts",
+          useCdn: false,
+          stega: true,
+        }
+      : undefined,
+  );
+}
