@@ -1,4 +1,4 @@
-import { sanityClient } from "./client";
+import { sanityClient, sanityClientWithToken } from "./client";
 import { EventData, JournalPostData, OfferingsData, PageData } from "./types";
 
 // Pages
@@ -25,7 +25,9 @@ export async function getJournalPostBySlug(
   slug: string,
   isEnabled: boolean,
 ): Promise<JournalPostData | null> {
-  return sanityClient.fetch(
+  const client = isEnabled ? sanityClientWithToken : sanityClient;
+
+  return client.fetch(
     `*[_type == "journalPost" && slug.current == $slug][0]`,
     { slug },
     isEnabled
@@ -37,17 +39,3 @@ export async function getJournalPostBySlug(
       : undefined,
   );
 }
-
-//   `*[_type == "page" && slug.current == $slug][0]{title}`
-
-// const data = await client.fetch(
-//     query,
-//     { slug },
-//     isEnabled
-//       ? {
-//           perspective: "drafts",
-//           useCdn: false,
-//           stega: true,
-//         }
-//       : undefined
-//   );
