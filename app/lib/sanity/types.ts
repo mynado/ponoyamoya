@@ -23,3 +23,10 @@ export interface OfferingsData extends BaseData {
   icon: string;
   content: { children: []; style: string; _type: string }[];
 }
+
+export interface JournalPostData extends BaseData {
+  title: string;
+  slug: { current: string };
+  body: { children: []; style: string; _type: string }[];
+  publishedAt: string;
+}

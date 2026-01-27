@@ -1,5 +1,5 @@
 import { sanityClient } from "./client";
-import { EventData, OfferingsData, PageData } from "./types";
+import { EventData, JournalPostData, OfferingsData, PageData } from "./types";
 
 // Pages
 export async function getPage(heading: string): Promise<PageData | null> {
@@ -19,3 +19,35 @@ export async function getUpcomingEvents(): Promise<EventData[]> {
 export async function getOfferings(): Promise<OfferingsData[]> {
   return sanityClient.fetch(`*[_type == "offerings"] | order(_createdAt asc)`);
 }
+
+// Journal Posts
+export async function getJournalPostBySlug(
+  slug: string,
+  isEnabled: boolean,
+): Promise<JournalPostData | null> {
+  return sanityClient.fetch(
+    `*[_type == "journalPost" && slug.current == $slug][0]`,
+    { slug },
+    isEnabled
+      ? {
+          perspective: "drafts",
+          useCdn: false,
+          stega: true,
+        }
+      : undefined,
+  );
+}
+
+//   `*[_type == "page" && slug.current == $slug][0]{title}`
+
+// const data = await client.fetch(
+//     query,
+//     { slug },
+//     isEnabled
+//       ? {
+//           perspective: "drafts",
+//           useCdn: false,
+//           stega: true,
+//         }
+//       : undefined
+//   );

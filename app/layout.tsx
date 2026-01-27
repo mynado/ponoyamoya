@@ -2,6 +2,9 @@ import "./globals.css";
 import Header from "./components/Header";
 import FooterWrapper from "./components/FooterWrapper";
 import { Metadata } from "next";
+import { draftMode } from "next/headers";
+import { DisableDraftMode } from "./components/DisableDraftMode";
+import { VisualEditing } from "next-sanity/visual-editing";
 
 export const metadata: Metadata = {
   title: "Pono ya Moya: Anti-Disciplinary Platform for Ancestral Healing",
@@ -35,7 +38,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -45,6 +48,12 @@ export default function RootLayout({
       <body className="bg-white text-gray-900 min-h-screen flex flex-col">
         <Header />
         <main className="flex-1">{children}</main>
+        {(await draftMode()).isEnabled && (
+          <>
+            <VisualEditing />
+            <DisableDraftMode />
+          </>
+        )}
         <FooterWrapper />
       </body>
     </html>
