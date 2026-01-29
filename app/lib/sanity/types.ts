@@ -5,6 +5,12 @@ export type BaseData = {
   _updatedAt: string;
 };
 
+type ImageData = {
+  _type: string;
+  alt: string;
+  asset: { _ref: string; _type: string };
+};
+
 export interface PageData extends BaseData {
   heading: string;
   content: { children: []; style: string; _type: string }[];
@@ -29,4 +35,7 @@ export interface JournalPostData extends BaseData {
   slug: { current: string };
   body: { children: []; style: string; _type: string }[];
   publishedAt: string;
+  excerpt?: string;
+  heroImage?: ImageData;
+  thumbnail?: ImageData;
 }

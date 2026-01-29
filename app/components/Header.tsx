@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import Button from "./Button";
-import Image from "next/image";
 import Close from "@/icons/close";
 
 export default function Header() {
@@ -10,6 +9,12 @@ export default function Header() {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+  const menuItems: { name: string; href: string }[] = [
+    { name: "OFFERINGS", href: "/offerings" },
+    { name: "JOURNAL", href: "/journal" },
+    { name: "ABOUT", href: "/about" },
+    { name: "CONTACT", href: "/contact" },
+  ];
   return (
     <header className="bg-white shadow">
       <nav
@@ -27,15 +32,11 @@ export default function Header() {
             </Button>
           </div>
           <ul className="hidden sm:flex sm:gap-4 sm:py-2 nav-link">
-            <li>
-              <Link href="/offerings">OFFERINGS</Link>
-            </li>
-            <li>
-              <Link href="/about">ABOUT</Link>
-            </li>
-            <li>
-              <Link href="/contact">CONTACT</Link>
-            </li>
+            {menuItems.map((item) => (
+              <li key={item.name}>
+                <Link href={item.href}>{item.name}</Link>
+              </li>
+            ))}
           </ul>
         </div>
         {/* COLLAPSE MENU */}
@@ -53,21 +54,11 @@ export default function Header() {
             </Button>
           </div>
           <ul className="flex flex-col gap-4 p-4 items-end text-white">
-            <li>
-              <Link href="/offerings" onClick={toggleMenu}>
-                OFFERINGS
-              </Link>
-            </li>
-            <li>
-              <Link href="/about" onClick={toggleMenu}>
-                ABOUT
-              </Link>
-            </li>
-            <li>
-              <Link href="/contact" onClick={toggleMenu}>
-                CONTACT
-              </Link>
-            </li>
+            {menuItems.map((item) => (
+              <li key={item.name}>
+                <Link href={item.href}>{item.name}</Link>
+              </li>
+            ))}
           </ul>
         </div>
       </nav>
