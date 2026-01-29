@@ -20,7 +20,7 @@ export default async function Journal() {
                   src={getImageUrl(post.thumbnail.asset._ref)}
                   alt={post.thumbnail.alt}
                   width={400}
-                  height={200}
+                  height={300}
                 />
               )}
               <h3>

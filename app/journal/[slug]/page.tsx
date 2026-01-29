@@ -19,12 +19,14 @@ export default async function JournalPage({
         <Image
           src={getImageUrl(pageData.heroImage.asset._ref)}
           alt={pageData.heroImage.alt}
-          width={1500}
-          height={600}
+          width={1920}
+          height={1080}
         />
       )}
-      <div className="max-w-(--breakpoint-md) mx-auto w-full px-4">
-        <h1 className="text-center text-4xl font-bold">{pageData?.title}</h1>
+      <div className="max-w-(--breakpoint-md) mx-auto w-full p-4">
+        <h1 className="text-center text-4xl font-bold mb-4">
+          {pageData?.title}
+        </h1>
         {pageData?.publishedAt && (
           <p className="text-gray-600">
             {new Date(pageData?.publishedAt).toLocaleDateString("en-SE", {
