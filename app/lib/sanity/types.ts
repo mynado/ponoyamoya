@@ -35,6 +35,7 @@ export interface JournalPostData extends BaseData {
   slug: { current: string };
   body: { children: []; style: string; _type: string }[];
   publishedAt: string;
+  categories: { _id: string; title: string; slug: string }[];
   excerpt?: string;
   heroImage?: ImageData;
   thumbnail?: ImageData;

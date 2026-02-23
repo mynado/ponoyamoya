@@ -28,13 +28,23 @@ export async function getJournalPostBySlug(
   const client = isEnabled ? sanityClientWithToken : sanityClient;
 
   return client.fetch(
-    `*[_type == "journalPost" && slug.current == $slug][0]`,
+    `*[_type == "journalPost" && slug.current == $slug][0]{
+      title,
+      slug,
+      body,
+      heroImage,
+      publishedAt,
+      "categories": categories[]->{
+        _id,
+        title,
+        slug
+      }
+    }`,
     { slug },
     isEnabled
       ? {
           perspective: "drafts",
           useCdn: false,
-          stega: true,
         }
       : undefined,
   );
@@ -45,15 +55,32 @@ export async function getAllJournalPosts(
 ): Promise<JournalPostData[]> {
   const client = isEnabled ? sanityClientWithToken : sanityClient;
 
-  return client.fetch(
-    `*[_type == "journalPost"] | order(publishedAt desc)`,
-    {},
-    isEnabled
-      ? {
-          perspective: "drafts",
-          useCdn: false,
-          stega: true,
+  return client
+    .fetch(
+      `*[_type == "journalPost"] 
+      | order(publishedAt desc) {
+        _id,
+        title,
+        "slug": slug.current,
+        publishedAt,
+        excerpt,
+        thumbnail,
+        "categories": categories[]->{
+          _id,
+          title,
+          "slug": slug.current
         }
-      : undefined,
-  );
+      }`,
+      {},
+      isEnabled
+        ? {
+            perspective: "drafts",
+            useCdn: false,
+          }
+        : undefined,
+    )
+    .catch((error) => {
+      console.error("Error fetching journal posts:", error);
+      return [];
+    });
 }

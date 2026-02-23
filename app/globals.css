@@ -15,6 +15,9 @@ layer(base);
 }
 
 @theme {
+  --color-background-primary: hsl(35 30% 95%);
+  --color-text-primary: hsl(25 20% 12%);
+  --color-text-secondary: hsl(25 12% 45%);
   --color-spiritblue: #0806be;
   --color-spiritblue-200: #060599;
   --color-spiritred: #be0606;
@@ -31,9 +34,8 @@ layer(base);
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  /* color-scheme: light dark; */
   color: rgba(0, 0, 0, 0.87);
-  background-color: #fff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -68,7 +70,8 @@ body {
 .nav-link {
   font-family: "Ojuju", sans-serif;
   font-weight: 700;
-  color: var(--color-spiritblue);
+  /* color: var(--color-spiritblue); */
+  color: var(--color-text-primary);
 }
 .nav-link a:hover,
 .nav-link a:active {
@@ -81,8 +84,9 @@ body {
 h1,
 h2,
 h3 {
-  color: var(--color-spiritblue);
+  /* color: var(--color-spiritblue); */
   font-family: "Ojuju", sans-serif;
+  color: var(--color-text-primary);
 }
 
 h1 {

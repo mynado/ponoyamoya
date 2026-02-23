@@ -18,7 +18,7 @@ export default function Header() {
   return (
     <header className="bg-white shadow">
       <nav
-        className={`w-full flex flex-col items-center justify-center pr-0 pl-4 sm:pr-4 fixed top-0 bg-white/80 backdrop-blur-xs z-50`}
+        className={`w-full flex flex-col items-center justify-center pr-0 pl-4 sm:pr-4 fixed top-0 backdrop-blur-xs z-50`}
       >
         <div className="flex justify-between items-center w-full">
           <Link href="/">

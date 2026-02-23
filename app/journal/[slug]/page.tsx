@@ -14,7 +14,7 @@ export default async function JournalPage({
   console.log("Journal Page Slug:", slug, "Draft Mode Enabled:", isEnabled);
   const pageData = await getJournalPostBySlug(slug, isEnabled);
   return (
-    <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8">
+    <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8 max-w-4xl mx-auto">
       {pageData?.heroImage && (
         <Image
           src={getImageUrl(pageData.heroImage.asset._ref)}

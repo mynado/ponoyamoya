@@ -45,7 +45,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body className="bg-white text-gray-900 min-h-screen flex flex-col">
+      <body className="bg-background-primary text-foreground-secondary min-h-screen flex flex-col">
         <Header />
         <main className="flex-1">{children}</main>
         {(await draftMode()).isEnabled && (
