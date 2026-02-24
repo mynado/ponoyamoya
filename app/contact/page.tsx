@@ -25,7 +25,9 @@ export default async function ContactPage() {
   return (
     <div className="mt-16 flex flex-col w-full items-center justify-center gap-4">
       <div className="max-w-(--breakpoint-md) mx-auto w-full px-4">
-        <h1 className="text-center mb-4">{pageData?.heading || "Contact"}</h1>
+        <h1 className="text-4xl md:text-5xl font-display font-medium mb-6 text-foreground animate-fade-in">
+          {pageData?.heading || "Contact"}
+        </h1>
         {pageData?.content && (
           <PortableText
             value={pageData.content}

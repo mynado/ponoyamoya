@@ -27,7 +27,9 @@ export default async function OfferingsPage() {
   return (
     <div className="flex flex-col items-center justify-center gap-8 mt-16">
       <div className="max-w-(--breakpoint-md) mx-auto w-full px-4">
-        <h1 className="text-center mb-4">{page?.heading}</h1>
+        <h1 className="text-4xl md:text-5xl font-display font-medium mb-6 text-foreground animate-fade-in">
+          {page?.heading}
+        </h1>
         {page?.content && <PortableText value={page.content} />}
       </div>
 

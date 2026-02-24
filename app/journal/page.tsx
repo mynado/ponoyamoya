@@ -11,7 +11,9 @@ export default async function Journal() {
   return (
     <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8">
       <div className="mx-auto max-w-3xl w-full">
-        <h1 className="text-4xl font-bold">Journal</h1>
+        <h1 className="text-4xl md:text-5xl font-display font-medium mb-6 text-foreground animate-fade-in">
+          Journal
+        </h1>
         <ul className="mt-8">
           {allPosts.map((post) => (
             <li key={post._id} className="mb-8">

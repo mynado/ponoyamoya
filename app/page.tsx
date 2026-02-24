@@ -19,8 +19,10 @@ const Home = () => {
             Photo by Saleen Gomani
           </figcaption>
         </figure>
-        <div className="absolute left-4 right-4 bottom-8 max-w-xl md:left-[unset] py-8 px-4 bg-black/40 p-4 rounded-lg flex flex-col justify-center gap-4 md:items-center text-white">
-          <h1 className="self-start text-white!">Pono ya Moya</h1>
+        <div className="absolute left-4 right-4 bottom-8 max-w-xl md:left-[unset] py-8 px-4 bg-black/40 p-4 rounded-lg flex flex-col gap-4 text-white">
+          <h1 className="text-4xl md:text-5xl font-display font-medium mb-6 text-foreground animate-fade-in text-white">
+            Pono ya Moya
+          </h1>
           <p className="text-xl">
             An anti-disciplinary platform that centers traditional healing and
             similar immersions in the &apos;otherwise&apos;
