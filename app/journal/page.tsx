@@ -16,16 +16,13 @@ export default async function Journal() {
         </h1>
         <ul className="mt-8">
           {allPosts.map((post) => (
-            <li key={post._id} className="mb-8">
+            <li key={post._id} className="my-12">
               <Card postData={post}>
-                <h3>
-                  <Link
-                    href={`/journal/${post.slug}`}
-                    className="text-2xl font-semibold hover:underline"
-                  >
+                <Link href={`/journal/${post.slug}`}>
+                  <h2 className="text-2xl md:text-3xl font-display font-medium my-4 text-foreground group-hover:text-primary transition-colors">
                     {post.title}
-                  </Link>
-                </h3>
+                  </h2>
+                </Link>
                 <div>{post.excerpt && <p>{post.excerpt}</p>}</div>
               </Card>
             </li>

@@ -8,8 +8,10 @@ export default async function Events() {
 
   if (!eventsData || eventsData.length === 0) {
     return (
-      <div className="py-8 px-4 w-full text-center">
-        <h2 className="text-2xl font-semibold mb-4">Upcoming Offerings</h2>
+      <div className="max-w-(--breakpoint-md) mx-auto w-full px-4">
+        <h2 className="text-2xl font-display font-medium mb-3 text-foreground">
+          Upcoming Offerings
+        </h2>
         <p>No upcoming offerings</p>
       </div>
     );
@@ -17,7 +19,7 @@ export default async function Events() {
 
   return (
     <div className="py-8 px-4 w-full">
-      <h2 className="text-2xl font-semibold text-center mb-4">
+      <h2 className="text-2xl font-display font-medium mb-3 text-foreground">
         Upcoming Offerings
       </h2>
       <div className="max-w-[var(--breakpoint-xl)] mx-auto flex flex-wrap justify-center gap-4">

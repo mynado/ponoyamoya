@@ -19,7 +19,7 @@ export default function Card({
   postData: JournalPostData;
 }) {
   return (
-    <div className="flex flex-col gap-1">
+    <article className="flex flex-col gap-1">
       <div className="flex items-center gap-4">
         {postData.categories && postData.categories.length > 0 && (
           <span
@@ -41,6 +41,6 @@ export default function Card({
         <span className="text-gray-600">Share</span>
       </div>
       {children}
-    </div>
+    </article>
   );
 }
