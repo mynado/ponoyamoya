@@ -18,5 +18,16 @@ export const sanityClientWithToken = createClient({
   stega: {
     enabled: true,
     studioUrl: process.env.NEXT_PUBLIC_SANITY_STUDIO_URL,
+    filter: (props) => {
+      if (
+        props.sourcePath.at(-1) === "slug" ||
+        props.sourcePath.at(-1) === "publishedAt" ||
+        props.sourcePath.at(-1) === "_id" ||
+        props.sourcePath.includes("categories")
+      ) {
+        return false;
+      }
+      return props.filterDefault(props);
+    },
   },
 });

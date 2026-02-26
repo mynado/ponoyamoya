@@ -2,6 +2,7 @@ import { getAllJournalPosts } from "@/lib/sanity/queries";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import Card from "@/components/Card";
+import { stegaClean } from "@sanity/client/stega";
 
 export default async function Journal() {
   const { isEnabled } = await draftMode();
@@ -20,10 +21,10 @@ export default async function Journal() {
               <Card postData={post}>
                 <Link href={`/journal/${post.slug}`}>
                   <h2 className="text-2xl md:text-3xl font-display font-medium my-4 text-foreground group-hover:text-primary transition-colors">
-                    {post.title}
+                    {stegaClean(post.title)}
                   </h2>
                 </Link>
-                <div>{post.excerpt && <p>{post.excerpt}</p>}</div>
+                <div>{post.excerpt && <p>{stegaClean(post.excerpt)}</p>}</div>
               </Card>
             </li>
           ))}
