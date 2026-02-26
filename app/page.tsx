@@ -41,7 +41,7 @@ const pillars = [
 const Home = () => {
   return (
     <div>
-      <section className="relative h-[75vh] w-full">
+      <section className="relative h-[90vh] md:h-[75vh] w-full">
         <Image
           src={AltarSessions}
           alt="Altar session"
@@ -50,16 +50,16 @@ const Home = () => {
           className="object-cover h-full w-full"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background-primary via-background-primary/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background-primary via-background-primary/60 to-transparent" />
         <div className="absolute left-4 right-4 md:left-1/2 md:transform md:-translate-x-1/2 bottom-4 max-w-xl flex flex-col items-center gap-4">
           <h1 className="text-4xl md:text-5xl font-display font-medium text-foreground animate-fade-in">
             Pono ya Moya
           </h1>
-          <p className="text-xl">
+          <p className="text-xl text-stone-700">
             An anti-disciplinary platform that centers traditional healing and
             similar immersions in the &apos;otherwise&apos;
           </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-start">
+          <div className="flex flex-col w-full md:w-auto md:flex-row gap-4 justify-start">
             <Link
               href="/offerings"
               className="bg-spiritblue text-white flex justify-center items-center font-semibold w-full md:w-auto md:self-end px-8 py-4 hover:bg-spiritblue-200 w-full md:w-auto text-center"

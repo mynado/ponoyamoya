@@ -27,8 +27,8 @@ export default function Header() {
             </div>
           </Link>
           <div className="sm:hidden nav-link">
-            <Button typeStyle="tertiary" onClick={toggleMenu}>
-              <span className="font-bold text-spiritblue">MENU</span>
+            <Button typeStyle="tertiary" onClick={toggleMenu} className="!px-4">
+              <span>MENU</span>
             </Button>
           </div>
           <ul className="hidden sm:flex sm:gap-4 sm:py-2 nav-link">
@@ -56,7 +56,9 @@ export default function Header() {
           <ul className="flex flex-col gap-4 p-4 items-end text-white">
             {menuItems.map((item) => (
               <li key={item.name}>
-                <Link href={item.href}>{item.name}</Link>
+                <Link onClick={toggleMenu} href={item.href}>
+                  {item.name}
+                </Link>
               </li>
             ))}
           </ul>
