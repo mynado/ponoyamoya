@@ -103,3 +103,7 @@ body {
   text-underline-offset: 4px;
   text-decoration-thickness: 2px;
 }
+
+p {
+  margin-bottom: 1rem;
+}

@@ -21,7 +21,7 @@ export default async function Journal() {
               <Card postData={post}>
                 <Link href={`/journal/${post.slug}`}>
                   <h2 className="text-2xl md:text-3xl font-display font-medium my-4 text-foreground group-hover:text-primary transition-colors">
-                    {stegaClean(post.title)}
+                    {post.title}
                   </h2>
                 </Link>
                 <div>{post.excerpt && <p>{stegaClean(post.excerpt)}</p>}</div>
