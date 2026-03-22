@@ -1,19 +1,6 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap")
-layer(base); */
-@import url("https://fonts.googleapis.com/css2?family=Ojuju:wght@200..800&display=swap")
-layer(base);
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ojuju:wght@200..800&display=swap");
 @import "tailwindcss";
-
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
-}
 
 @theme {
   --color-background-primary: hsl(35 30% 95%);
@@ -24,11 +11,18 @@ layer(base);
   --color-spiritblue-200: #060599;
   --color-spiritred: #be0606;
   --color-spirityellow: #efb632;
-  --font-display: "Playfair Display", serif;
-  --font-body: "DM Sans", sans-serif;
+  --font-display: "Lora", serif;
+  --font-body: "Work Sans", sans-serif;
 }
 
 @layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
   body {
     font-family: var(--font-body);
   }
@@ -44,15 +38,6 @@ layer(base);
   }
 }
 
-@layer utilities {
-  .font-display {
-    font-family: var(--font-display);
-  }
-  .font-body {
-    font-family: var(--font-body);
-  }
-}
-
 * {
   box-sizing: border-box;
 }
@@ -60,10 +45,6 @@ layer(base);
 :root {
   line-height: 1.5;
   font-weight: 400;
-
-  /* color-scheme: light dark; */
-  color: rgba(0, 0, 0, 0.87);
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

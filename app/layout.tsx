@@ -5,6 +5,21 @@ import { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { DisableDraftMode } from "./components/DisableDraftMode";
 import { VisualEditing } from "next-sanity/visual-editing";
+import { Work_Sans, Lora } from "next/font/google";
+
+const lora = Lora({
+  subsets: ["latin"],
+  variable: "--font-lora",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  variable: "--font-work-sans",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Pono ya Moya: Anti-Disciplinary Platform for Ancestral Healing",
@@ -44,8 +59,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
-      <body className="bg-background-primary text-text-secondary min-h-screen flex flex-col">
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={workSans.className}
+    >
+      <body
+        className={`${lora.className} bg-background-primary text-text-secondary min-h-screen flex flex-col`}
+      >
         <Header />
         <main className="flex-1 mt-12 md:mt-10">{children}</main>
         {(await draftMode()).isEnabled && (

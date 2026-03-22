@@ -20,7 +20,7 @@ export default function Header() {
       <nav
         className={`w-full flex flex-col items-center justify-center pr-0 pl-4 sm:pr-4 fixed top-0 backdrop-blur-xs z-50`}
       >
-        <div className="flex justify-between items-center w-full">
+        <div className="flex justify-between font-body items-center w-full">
           <Link href="/">
             <div className="text-spiritblue text-lg text-bold logo">
               PONO YA MOYA

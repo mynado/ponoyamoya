@@ -23,7 +23,7 @@ export default async function JournalPage({
           height={1080}
         />
       )}
-      <div className="max-w-(--breakpoint-md) mx-auto w-full p-4">
+      <div className="max-w-(--breakpoint-md) mx-auto w-full">
         <h1 className="text-center text-4xl font-bold mb-4">
           {pageData?.title}
         </h1>
@@ -37,7 +37,7 @@ export default async function JournalPage({
             })}
           </p>
         )}
-        <div className="max-w-[var(--breakpoint-md)] w-full">
+        <div className="max-w-[var(--breakpoint-md)] text-lg md:text-xl w-full">
           {pageData?.body && <PortableText value={pageData.body} />}
         </div>
       </div>
