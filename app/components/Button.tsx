@@ -24,7 +24,7 @@ export default function Button({
     <button
       className={clsx(
         typeSettings[typeStyle],
-        "py-3 px-6 font-medium rounded-lg cursor-pointer disabled:opacity-80 disabled:cursor-not-allowed hover:opacity-90 transition-all duration-200 ease-in-out flex items-center justify-center",
+        "py-3 px-6 font-medium font-body cursor-pointer disabled:opacity-80 disabled:cursor-not-allowed hover:opacity-90 transition-all duration-200 ease-in-out flex items-center justify-center",
         className,
       )}
       {...rest}

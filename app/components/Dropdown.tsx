@@ -43,7 +43,6 @@ export default function Dropdown({
         className={`
           bg-white
           border-2
-          rounded-md
           w-full
           h-9
           px-2

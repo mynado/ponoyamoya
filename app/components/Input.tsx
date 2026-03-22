@@ -34,7 +34,6 @@ export default function Input({
         className={`
           bg-white
           border-2
-          rounded-md
           px-2 py-1
           w-full
           transition-colors

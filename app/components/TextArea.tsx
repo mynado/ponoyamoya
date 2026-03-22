@@ -28,8 +28,7 @@ export default function TextArea({
           bg-white 
           border 
           border-spiritblue 
-          border-2 
-          rounded-md 
+          border-2
           placeholder:text-slate-600 
           w-full 
           min-h-[200px] 
