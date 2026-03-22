@@ -2,23 +2,25 @@
 import Link from "next/link";
 import { useState } from "react";
 import Button from "./Button";
-import Close from "@/icons/close";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
   const menuItems: { name: string; href: string }[] = [
     { name: "OFFERINGS", href: "/offerings" },
     { name: "JOURNAL", href: "/journal" },
     { name: "ABOUT", href: "/about" },
     { name: "CONTACT", href: "/contact" },
   ];
+
   return (
     <header className="bg-white shadow">
       <nav
-        className={`w-full flex flex-col items-center justify-center pr-0 pl-4 sm:pr-4 fixed top-0 backdrop-blur-xs z-50`}
+        className={`w-full flex flex-col items-center justify-center pr-2 pl-4 md:px-4 fixed top-0 backdrop-blur-xs z-50`}
       >
         <div className="flex justify-between font-body items-center w-full">
           <Link href="/">
@@ -26,11 +28,34 @@ export default function Header() {
               PONO YA MOYA
             </div>
           </Link>
+
+          {/* Mobile menu toggle */}
           <div className="sm:hidden nav-link">
-            <Button typeStyle="tertiary" onClick={toggleMenu} className="!px-4">
-              <span>MENU</span>
+            <Button
+              onClick={toggleMenu}
+              typeStyle="tertiary"
+              className="flex flex-col justify-center items-center w-10 h-10 gap-[5px] focus:outline-none"
+              aria-label="Toggle menu"
+            >
+              <span
+                className={`block h-[2px] w-6 bg-spiritblue rounded-full transition-all duration-300 origin-center ${
+                  isOpen ? "rotate-45 translate-y-[7px]" : ""
+                }`}
+              />
+              <span
+                className={`block h-[2px] w-6 bg-spiritblue rounded-full transition-all duration-300 ${
+                  isOpen ? "opacity-0 scale-x-0" : ""
+                }`}
+              />
+              <span
+                className={`block h-[2px] w-6 bg-spiritblue rounded-full transition-all duration-300 origin-center ${
+                  isOpen ? "-rotate-45 -translate-y-[7px]" : ""
+                }`}
+              />
             </Button>
           </div>
+
+          {/* Desktop nav */}
           <ul className="hidden sm:flex sm:gap-4 sm:py-2 nav-link">
             {menuItems.map((item) => (
               <li key={item.name}>
@@ -39,24 +64,42 @@ export default function Header() {
             ))}
           </ul>
         </div>
-        {/* COLLAPSE MENU */}
+
+        {/* MOBILE OVERLAY */}
         <div
-          className={`${isOpen ? "absolute right-0 top-0 rounded-tl-xl rounded-bl-xl bg-spiritblue flex flex-col items-end z-50 min-w-[150px] min-h-[200px] opacity-100" : "opacity-0 hidden"} transition-all duration-200 sm:hidden nav-link`}
+          className={`
+            sm:hidden fixed inset-0 top-10 z-50 bg-spiritblue
+            flex flex-col justify-between
+            transition-all duration-500 ease-in-out
+            ${
+              isOpen
+                ? "opacity-100 translate-y-0 pointer-events-auto"
+                : "opacity-0 -translate-y-full pointer-events-none"
+            }
+          `}
         >
-          <div className="w-full flex justify-end">
-            {" "}
-            <Button
-              onClick={toggleMenu}
-              typeStyle="tertiary"
-              className="text-white p-3"
-            >
-              <Close className="w-8 h-8 invert" width={20} height={20} />
-            </Button>
-          </div>
-          <ul className="flex flex-col gap-4 p-4 items-end text-white">
-            {menuItems.map((item) => (
-              <li key={item.name}>
-                <Link onClick={toggleMenu} href={item.href}>
+          {/* Centered nav items */}
+          <ul className="flex flex-col items-end bg-spiritblue py-12 px-4 justify-center gap-8 flex-1 nav-link">
+            {menuItems.map((item, index) => (
+              <li
+                key={item.name}
+                className={`
+                  transition-all duration-500
+                  ${
+                    isOpen
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-6"
+                  }
+                `}
+                style={{
+                  transitionDelay: isOpen ? `${index * 80 + 150}ms` : "0ms",
+                }}
+              >
+                <Link
+                  href={item.href}
+                  onClick={toggleMenu}
+                  className="text-white text-3xl tracking-widest font-body hover:opacity-60 transition-opacity duration-200"
+                >
                   {item.name}
                 </Link>
               </li>

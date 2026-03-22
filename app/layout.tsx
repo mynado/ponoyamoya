@@ -68,7 +68,7 @@ export default async function RootLayout({
         className={`${lora.className} bg-background-primary text-text-secondary min-h-screen flex flex-col`}
       >
         <Header />
-        <main className="flex-1 mt-12 md:mt-10">{children}</main>
+        <main className="flex-1 mt-10">{children}</main>
         {(await draftMode()).isEnabled && (
           <>
             <VisualEditing />
