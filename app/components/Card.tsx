@@ -1,5 +1,3 @@
-"use client";
-
 import { JournalPostData } from "@/lib/sanity/types";
 import clsx from "clsx";
 import { ReactNode } from "react";

@@ -1,5 +1,3 @@
-"use client";
-
 import FlowerBlue from "@/icons/flower-blue";
 
 export default function Footer() {
