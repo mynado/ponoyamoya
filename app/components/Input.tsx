@@ -22,7 +22,7 @@ export default function Input({
   return (
     <div className="w-full">
       {labelText && (
-        <label htmlFor={rest.id} className="block mb-1">
+        <label htmlFor={rest.id} className="block mb-2">
           {labelText}
         </label>
       )}
@@ -33,12 +33,11 @@ export default function Input({
         aria-invalid={error.isError}
         className={`
           bg-white
-          border-2
           px-2 py-1
           w-full
           transition-colors
           ${showError ? "border-red-600" : ""}
-          ${showValid ? "border-green-600" : "border-spiritblue"}
+          ${showValid ? "border-green-600" : ""}
           ${className}
         `}
       />

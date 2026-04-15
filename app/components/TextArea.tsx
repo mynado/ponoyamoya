@@ -22,19 +22,18 @@ export default function TextArea({
   const showValid = isDirty && !error.isError && rest.value;
   return (
     <div>
-      <label htmlFor={rest.id}>{labelText}</label>
+      <label htmlFor={rest.id} className="block mb-2">
+        {labelText}
+      </label>
       <textarea
         className={`
-          bg-white 
-          border 
-          border-spiritblue 
-          border-2
+          bg-white
           placeholder:text-slate-600 
           w-full 
           min-h-[200px] 
           p-2
           ${showError ? "border-red-600" : ""}
-          ${showValid ? "border-green-600" : "border-spiritblue"} 
+          ${showValid ? "border-green-600" : ""} 
           ${className} 
           `}
         {...rest}

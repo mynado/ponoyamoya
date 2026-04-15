@@ -131,7 +131,7 @@ export default function ContactForm() {
       <form
         onSubmit={onSubmit}
         noValidate
-        className="flex flex-col gap-4 w-full"
+        className="flex flex-col gap-4 w-full font-body"
       >
         <Dropdown
           id="reason"
@@ -201,7 +201,10 @@ export default function ContactForm() {
           minLength={10}
         />
 
-        <Button disabled={isSending || isSuccess}>
+        <Button
+          disabled={isSending || isSuccess}
+          className="w-max min-w-[150px] uppercase"
+        >
           {isSending ? (
             <LoadingSpinner
               width={20}
@@ -210,7 +213,7 @@ export default function ContactForm() {
               alt="Loading..."
             />
           ) : (
-            "Send"
+            "Send Message"
           )}
         </Button>
 

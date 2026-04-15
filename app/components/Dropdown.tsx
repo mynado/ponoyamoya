@@ -31,7 +31,7 @@ export default function Dropdown({
   return (
     <div className="w-full">
       {labelText && (
-        <label htmlFor={rest.id} className="block mb-1">
+        <label htmlFor={rest.id} className="block mb-2">
           {labelText}
         </label>
       )}
@@ -42,13 +42,12 @@ export default function Dropdown({
         aria-invalid={error.isError}
         className={`
           bg-white
-          border-2
           w-full
           h-9
           px-2
           transition-colors
           ${showError ? "border-red-600" : ""}
-          ${showValid ? "border-green-600" : "border-spiritblue"}
+          ${showValid ? "border-green-600" : ""}
           ${className}
         `}
       >
