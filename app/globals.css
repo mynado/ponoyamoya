@@ -7,10 +7,11 @@
   --color-foreground: hsl(25 20% 12%);
   --color-text-primary: hsl(25 20% 12%);
   --color-text-secondary: hsl(23 13% 32%);
-  --color-spiritblue: #0806be;
-  --color-spiritblue-200: #060599;
-  --color-spiritred: #be0606;
-  --color-spirityellow: #efb632;
+  --color-spiritblue: hsl(235 55% 32%);
+  --color-spiritred: hsl(0 60% 38%);
+  --color-spirityellow: hsl(38 70% 52%);
+  --color-spiritwhite: hsl(40 20% 96%);
+  --color-spiritblack: hsl(0 0% 8%);
   --font-display: "Lora", serif;
   --font-body: "Work Sans", sans-serif;
 }

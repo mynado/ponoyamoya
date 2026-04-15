@@ -11,10 +11,11 @@ export default function Header() {
   };
 
   const menuItems: { name: string; href: string }[] = [
-    { name: "OFFERINGS", href: "/offerings" },
-    { name: "JOURNAL", href: "/journal" },
-    { name: "ABOUT", href: "/about" },
-    { name: "CONTACT", href: "/contact" },
+    { name: "ndumba", href: "/ndumba" },
+    { name: "practice", href: "/practice" },
+    { name: "journal", href: "/journal" },
+    { name: "about", href: "/about" },
+    { name: "contact", href: "/contact" },
   ];
 
   return (
@@ -25,7 +26,7 @@ export default function Header() {
         <div className="flex justify-between font-body items-center w-full">
           <Link href="/">
             <div className="text-spiritblue text-lg text-bold logo">
-              PONO YA MOYA
+              moyabyssal
             </div>
           </Link>
 
