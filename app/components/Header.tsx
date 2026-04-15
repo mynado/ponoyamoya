@@ -11,6 +11,7 @@ export default function Header() {
   };
 
   const menuItems: { name: string; href: string }[] = [
+    { name: "home", href: "/" },
     { name: "ndumba", href: "/ndumba" },
     { name: "practice", href: "/practice" },
     { name: "journal", href: "/journal" },

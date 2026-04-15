@@ -37,6 +37,7 @@ export default async function NdumbaPage() {
   return (
     <div className="flex flex-col items-center justify-center gap-8 mt-16">
       <div className="max-w-(--breakpoint-md) mx-auto w-full px-4">
+        <div className="h-[2px] w-10 bg-spiritblue mb-8"></div>
         <h1 className="text-4xl md:text-5xl font-display font-medium mb-6 text-foreground animate-fade-in">
           Ndumba
         </h1>

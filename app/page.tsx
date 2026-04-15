@@ -10,7 +10,7 @@ const Home = () => {
           className="group relative border-1 border-stone-200 p-6 w-full bg-spiritblue/10 text-spiritblack md:bg-transparent md:w-1/2 h-auto md:mb-0 hover:bg-spiritblue/10 hover:text-spiritblue! transition-colors duration-300"
         >
           <div className="p-6 md:text-right flex flex-col justify-center gap-2 h-full">
-            <div className="h-1 w-16 bg-spiritblue mb-4 md:self-end"></div>
+            <div className="h-[2px] w-10 bg-spiritblue mb-8 md:self-end"></div>
             <h2 className={`text-4xl font-bold group-hover:text-spiritblue`}>
               Ndumba
             </h2>
@@ -28,7 +28,7 @@ const Home = () => {
           className="group relative border-1 border-stone-200 p-6 w-full bg-spiritred/10 text-spiritblack md:bg-transparent md:w-1/2 h-auto md:mb-0 hover:bg-spiritred/10 hover:text-spiritred! transition-colors duration-300"
         >
           <div className="p-6 flex flex-col justify-center gap-2 h-full">
-            <div className="h-1 w-16 bg-spiritred mb-4"></div>
+            <div className="h-[2px] w-10 bg-spiritred mb-8"></div>
             <h2 className={`text-4xl font-bold group-hover:text-spiritred`}>
               Practice
             </h2>
