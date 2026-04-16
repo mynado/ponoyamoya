@@ -1,3 +1,5 @@
+import CreativeBlock from "@/components/ui/CreativeBlock";
+import { getPracticePostBySlug } from "@/lib/sanity/queries";
 import { draftMode } from "next/headers";
 
 export default async function PracticePage({
@@ -8,9 +10,19 @@ export default async function PracticePage({
   const { slug } = await params;
   const { isEnabled } = await draftMode();
   console.log("Practice Page Slug:", slug, "Draft Mode Enabled:", isEnabled);
-  //   TODO: Get page data from Sanity
-  //   const pageData = await getJournalPostBySlug(slug, isEnabled);
+  const pageData = await getPracticePostBySlug(slug, isEnabled);
+  console.log("Practice Post Data: ", pageData);
   return (
-    <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8 max-w-4xl mx-auto"></div>
+    <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8 max-w-4xl mx-auto">
+      {pageData ? (
+        pageData.page.map((item) => (
+          <div key={item._key}>
+            <CreativeBlock item={item} />
+          </div>
+        ))
+      ) : (
+        <p>no data</p>
+      )}
+    </div>
   );
 }
