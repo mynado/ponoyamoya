@@ -35,6 +35,7 @@ export interface PortableTextBlock {
   children: [];
   style: string;
   _type: string;
+  _key: string;
 }
 
 export interface CreativeBlockData {
@@ -89,12 +90,12 @@ export interface WorkItemData extends BaseData {
 
 // Get only neccessary info
 export interface PracticePostPageData extends BaseData {
-  excerpt: string;
+  // excerpt: string;
   page: CreativeBlockData[];
   seo: { _type: string; metaTitle: string };
   slug: { _type: string; current: string };
   status: string;
-  thumbnail?: ImageData;
+  // thumbnail?: ImageData;
   tags?: TagData[];
   title: string;
   year: string;

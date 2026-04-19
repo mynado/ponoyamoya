@@ -47,16 +47,14 @@ const creativeBlockComponents = {
   },
 };
 
-// .creative-block--collage { position: relative; } /* you can get creative here */
-
-export default function CreativeBlock({ item }: { item: CreativeBlockData }) {
-  console.log("CreativeBlockData: ", item);
+export default function CreativeBlock({ block }: { block: CreativeBlockData }) {
+  console.log("CreativeBlockData: ", block);
 
   return (
-    <div className={clsx(contentLayout[item.layout])}>
-      {item.content?.length > 0 && (
+    <div className={clsx(contentLayout[block.layout])}>
+      {block.content?.length > 0 && (
         <PortableText
-          value={item.content}
+          value={block.content}
           components={creativeBlockComponents}
         />
       )}

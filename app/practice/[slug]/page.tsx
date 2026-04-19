@@ -17,7 +17,7 @@ export default async function PracticePage({
       {pageData && pageData.page ? (
         pageData.page.map((item) => (
           <div key={item._key}>
-            <CreativeBlock item={item} />
+            <CreativeBlock block={item} />
           </div>
         ))
       ) : (
