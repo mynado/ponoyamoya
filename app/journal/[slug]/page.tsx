@@ -1,8 +1,8 @@
 import { draftMode } from "next/headers";
 import Image from "next/image";
-import getImageUrl from "@/lib/sanity/utils";
 import { getJournalPostBySlug } from "@/lib/sanity/queries/journal";
 import { PortableText } from "next-sanity";
+import { getImageUrl } from "@/lib/sanity/utils";
 
 export default async function JournalPage({
   params,

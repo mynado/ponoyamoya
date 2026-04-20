@@ -1,10 +1,10 @@
-import { CreativeBlockData, MediaBlock } from "@/lib/sanity/types";
-import getImageUrl from "@/lib/sanity/utils";
+import { CreativeBlockData, MediaBlock } from "@/lib/sanity/types/shared";
+import { getImageUrl } from "@/lib/sanity/utils";
 import clsx from "clsx";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
 
-const contentLayout = {
+const contentLayout: { [key: string]: string } = {
   full: "w-full",
   narrow: "max-w-7xl mx-auto w-full px-4",
   left: "mr-auto max-w-[60%]",
