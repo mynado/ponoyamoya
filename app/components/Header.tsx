@@ -2,22 +2,15 @@
 import Link from "next/link";
 import { useState } from "react";
 import Button from "./Button";
+import { SiteSettings } from "@/lib/sanity/types/pages";
 
-export default function Header() {
+export default function Header({ settings }: { settings: SiteSettings }) {
   const [isOpen, setIsOpen] = useState(false);
+  const navigation = settings.navigation!;
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
-  const menuItems: { name: string; href: string }[] = [
-    { name: "home", href: "/" },
-    { name: "ndumba", href: "/ndumba" },
-    { name: "practice", href: "/practice" },
-    { name: "journal", href: "/journal" },
-    { name: "about", href: "/about" },
-    { name: "contact", href: "/contact" },
-  ];
 
   return (
     <header className="bg-white shadow">
@@ -59,9 +52,9 @@ export default function Header() {
 
           {/* Desktop nav */}
           <ul className="hidden sm:flex sm:gap-4 sm:py-2 nav-link">
-            {menuItems.map((item) => (
-              <li key={item.name}>
-                <Link href={item.href}>{item.name}</Link>
+            {navigation.map((item) => (
+              <li key={item.label}>
+                <Link href={item.path}>{item.label}</Link>
               </li>
             ))}
           </ul>
@@ -82,9 +75,9 @@ export default function Header() {
         >
           {/* Centered nav items */}
           <ul className="flex flex-col items-end bg-spiritblue py-12 px-4 justify-center gap-8 flex-1 nav-link">
-            {menuItems.map((item, index) => (
+            {navigation.map((item, index) => (
               <li
-                key={item.name}
+                key={item.label}
                 className={`
                   transition-all duration-500
                   ${
@@ -98,11 +91,11 @@ export default function Header() {
                 }}
               >
                 <Link
-                  href={item.href}
+                  href={item.path}
                   onClick={toggleMenu}
                   className="text-white text-3xl tracking-widest font-body hover:opacity-60 transition-opacity duration-200"
                 >
-                  {item.name}
+                  {item.label}
                 </Link>
               </li>
             ))}

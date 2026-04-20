@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import { ArchiveImage } from "./ArchiveImage";
 import Link from "next/link";
-import getImageUrl from "@/lib/sanity/utils";
 import { PortableText } from "next-sanity";
 import { PortfolioWork } from "@/lib/sanity/types/portfolio";
+import { getImageUrl } from "@/lib/sanity/utils";
 
 type ArchiveGridProps = {
   items: PortfolioWork[];

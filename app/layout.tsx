@@ -6,6 +6,8 @@ import { draftMode } from "next/headers";
 import { DisableDraftMode } from "./components/DisableDraftMode";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { Work_Sans, Lora } from "next/font/google";
+import { getSiteSettings } from "./lib/sanity/queries/pages";
+import { urlFor } from "./lib/sanity/utils";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -21,43 +23,38 @@ const workSans = Work_Sans({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Pono ya Moya: Anti-Disciplinary Platform for Ancestral Healing",
-  description:
-    "Pono ya Moya is Nkgono Mantwa's practice (sangoma & moporofeta), channeled with and through Mmabatho Thobejane. Spiritual counsel centered on ancestral healing.",
-  keywords: [
-    "Pono ya Moya",
-    "Mmabatho Thobejane",
-    "ancestral healing",
-    "sangoma",
-    "moporofeta",
-    "spiritual counsel",
-    "healing practices ",
-    "traditional healer",
-  ],
-  openGraph: {
-    title: "Pono ya Moya: Anti-Disciplinary Platform for Ancestral Healing",
-    description:
-      "Pono ya Moya is Nkgono Mantwa's practice (sangoma & moporofeta), channeled with and through Mmabatho Thobejane. Spiritual counsel centered on ancestral healing.",
-    url: "https://ponoyamoya.com",
-    siteName: "Pono ya Moya",
-    images: [
-      {
-        url: "https://ponoyamoya.com/og-altar-session.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Pono ya Moya",
-      },
-    ],
-    type: "website",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings();
+  const { defaultSeo, siteName } = settings;
+
+  return {
+    title: {
+      default: siteName ?? "Pono ya Moya",
+      template: `%s — ${siteName ?? "Pono ya Moya"}`,
+    },
+    description: defaultSeo?.metaDescription,
+    openGraph: {
+      siteName: siteName ?? undefined,
+      type: "website",
+      ...(defaultSeo?.ogImage && {
+        images: [
+          {
+            url: urlFor(defaultSeo.ogImage).width(1200).height(630).url(),
+            width: 1200,
+            height: 630,
+          },
+        ],
+      }),
+    },
+  };
+}
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const settings = await getSiteSettings();
   return (
     <html
       lang="en"
@@ -67,7 +64,7 @@ export default async function RootLayout({
       <body
         className={`${lora.className} bg-background-primary text-text-secondary min-h-screen flex flex-col`}
       >
-        <Header />
+        <Header settings={settings} />
         <main className="flex-1 mt-10">{children}</main>
         {(await draftMode()).isEnabled && (
           <>
@@ -75,7 +72,7 @@ export default async function RootLayout({
             <DisableDraftMode />
           </>
         )}
-        <FooterWrapper />
+        <FooterWrapper settings={settings} />
       </body>
     </html>
   );

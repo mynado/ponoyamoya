@@ -1,6 +1,7 @@
 import FlowerBlue from "@/icons/flower-blue";
+import { SiteSettings } from "@/lib/sanity/types/pages";
 
-export default function Footer() {
+export default function Footer({ settings }: { settings: SiteSettings }) {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="flex flex-col items-center w-full justify-center gap-4 p-4">
