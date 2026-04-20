@@ -1,9 +1,9 @@
-import { sanityClientWithToken } from "../client";
+import { client } from "../client";
 
 // export async function getWorkItems(
 //   isEnabled: boolean,
 // ): Promise<WorkItemData[]> {
-//   const client = isEnabled ? sanityClientWithToken : sanityClient;
+//   const client = isEnabled ? client : sanityClient;
 //   return client
 //     .fetch(
 //       `*[_type == "portfolioWork"]
@@ -23,11 +23,11 @@ import { sanityClientWithToken } from "../client";
 // }
 
 export async function getPortfolioPage() {
-  return sanityClientWithToken.fetch(`*[_type == "portfolioPage"][0]`);
+  return client.fetch(`*[_type == "portfolioPage"][0]`);
 }
 
 export async function getPortfolioWorks(isEnabled: boolean) {
-  return sanityClientWithToken
+  return client
     .fetch(
       `
     *[_type == "portfolioWork"] | order(order asc) {
@@ -49,7 +49,7 @@ export async function getPortfolioWorks(isEnabled: boolean) {
 }
 
 export async function getPortfolioWorkBySlug(slug: string, isEnabled: boolean) {
-  return sanityClientWithToken
+  return client
     .fetch(
       `*[_type == "portfolioWork" && slug.current == $slug][0]`,
       { slug },
@@ -67,7 +67,7 @@ export async function getPortfolioWorkBySlug(slug: string, isEnabled: boolean) {
 }
 
 // export async function getPortfolioWorkBySlugTemp(slug: string) {
-//   return sanityClientWithToken.fetch(
+//   return client.fetch(
 //     `*[_type == "portfolioWork" && slug.current == $slug][0] {
 //       _id, title, slug, status, year, excerpt,
 //       page[] {
