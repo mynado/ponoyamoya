@@ -3,8 +3,7 @@ import { ArchiveImage } from "./ArchiveImage";
 import Link from "next/link";
 import { PortableText } from "next-sanity";
 import { PortfolioWork } from "@/lib/sanity/types/portfolio";
-import { getImageUrl } from "@/lib/sanity/utils";
-
+import { urlFor } from "@/lib/sanity/utils";
 type ArchiveGridProps = {
   items: PortfolioWork[];
 };
@@ -47,7 +46,7 @@ export default function ArchiveGrid({ items = [] }: ArchiveGridProps) {
           >
             {/* Image */}
             <ArchiveImage
-              src={getImageUrl(item.thumbnail!.asset._ref)}
+              src={urlFor(item.thumbnail).width(1200).height(630).url()} // TODO: Double check image sizes
               alt={item.title}
               fallbackColor={getFallbackColor(i)}
             />

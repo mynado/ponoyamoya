@@ -18,7 +18,7 @@ export function ArchiveImage({
   if (!src || error) {
     return <div className={clsx("absolute inset-0", fallbackColor)} />;
   }
-
+  // TODO: Double check image sizes and loading="eager"
   return (
     <Image
       src={src}
@@ -27,6 +27,8 @@ export function ArchiveImage({
       className={clsx(
         "object-cover transition-transform duration-700 group-hover:scale-105",
       )}
+      sizes="(max-width: 768px) 50vw, 33vw"
+      loading="eager"
       onError={() => setError(true)}
     />
   );
