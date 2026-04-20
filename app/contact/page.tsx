@@ -1,11 +1,10 @@
-import { PortableText } from "@portabletext/react";
-
-import type {
-  PortableTextBlock,
-  PortableTextComponentProps,
-} from "@portabletext/react";
 import { getPage } from "@/lib/sanity/queries";
 import ContactForm from "@/components/ContactForm";
+import {
+  PortableText,
+  PortableTextBlock,
+  PortableTextComponentProps,
+} from "next-sanity";
 
 // PortableText components
 const portableTextComponents = {

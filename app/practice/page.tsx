@@ -19,9 +19,7 @@ export default async function PracticePage() {
         <h1 className="text-4xl md:text-5xl font-display font-medium mb-6">
           {page.title}
         </h1>
-        <p className="text-lg font-body max-w-2xl leading-relaxed">
-          <PortableText value={page.intro[0]} />
-        </p>
+        <PortableText value={page.intro[0]} />
       </div>
 
       {/* Archive Grid */}

@@ -58,6 +58,7 @@ export interface SeoData {
 export interface TagData {
   _type: "tag";
   _id: string;
+  _key: string;
   _strengthenOnPublish: { template: { id: string }; type: string };
   label: string;
   slug: SanitySlug;

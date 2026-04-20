@@ -1,5 +1,5 @@
 import { getPage } from "@/lib/sanity/queries";
-import { PortableText } from "@portabletext/react";
+import { PortableText } from "next-sanity";
 
 export default async function AboutPage() {
   const pageData = await getPage("About");

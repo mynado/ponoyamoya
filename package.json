@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@emailjs/nodejs": "^5.0.2",
-    "@portabletext/react": "^6.0.2",
     "@portabletext/types": "^4.0.2",
     "@sanity/client": "^7.14.0",
     "clsx": "^2.1.1",

@@ -11,9 +11,6 @@ importers:
       '@emailjs/nodejs':
         specifier: ^5.0.2
         version: 5.0.2
-      '@portabletext/react':
-        specifier: ^6.0.2
-        version: 6.0.2(react@19.2.3)
       '@portabletext/types':
         specifier: ^4.0.2
         version: 4.0.2
@@ -1593,10 +1590,6 @@ packages:
 
   '@portabletext/toolkit@5.0.1':
     resolution: {integrity: sha512-qcwnWd15J2Ziwi0YfWHRx+DRqp87cPb+EBcYuEbDW0ChZwwxCdfIjDazzFpQeXnqhJn8own1c8UB3iHB61DiWg==}
-    engines: {node: '>=20.19 <22 || >=22.12'}
-
-  '@portabletext/types@4.0.1':
-    resolution: {integrity: sha512-L8PZjVjmdKpW+82c1oNqGMqCOtQD2xORqJfr6Is7X5XXbz38eLYY79IM/1ok+Esf/iGOPtEYORdcf0ETmsWYew==}
     engines: {node: '>=20.19 <22 || >=22.12'}
 
   '@portabletext/types@4.0.2':
@@ -7627,13 +7620,11 @@ snapshots:
   '@portabletext/to-html@5.0.1':
     dependencies:
       '@portabletext/toolkit': 5.0.1
-      '@portabletext/types': 4.0.1
+      '@portabletext/types': 4.0.2
 
   '@portabletext/toolkit@5.0.1':
     dependencies:
       '@portabletext/types': 4.0.2
-
-  '@portabletext/types@4.0.1': {}
 
   '@portabletext/types@4.0.2': {}
 

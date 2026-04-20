@@ -1,33 +1,11 @@
-import { client } from "../client";
-
-// export async function getWorkItems(
-//   isEnabled: boolean,
-// ): Promise<WorkItemData[]> {
-//   const client = isEnabled ? client : sanityClient;
-//   return client
-//     .fetch(
-//       `*[_type == "portfolioWork"]
-//       | order(publishedAt desc)`,
-//       {},
-//       isEnabled
-//         ? {
-//             perspective: "drafts",
-//             useCdn: false,
-//           }
-//         : undefined,
-//     )
-//     .catch((error) => {
-//       console.error("Error fetching journal posts:", error);
-//       return [];
-//     });
-// }
+import { client, getClient } from "../client";
 
 export async function getPortfolioPage() {
   return client.fetch(`*[_type == "portfolioPage"][0]`);
 }
 
-export async function getPortfolioWorks(isEnabled: boolean) {
-  return client
+export async function getPortfolioWorks(isPreview: boolean) {
+  return getClient(isPreview)
     .fetch(
       `
     *[_type == "portfolioWork"] | order(order asc) {
@@ -35,7 +13,7 @@ export async function getPortfolioWorks(isEnabled: boolean) {
     }
   `,
       {},
-      isEnabled
+      isPreview
         ? {
             perspective: "drafts",
             useCdn: false,
@@ -48,12 +26,12 @@ export async function getPortfolioWorks(isEnabled: boolean) {
     });
 }
 
-export async function getPortfolioWorkBySlug(slug: string, isEnabled: boolean) {
-  return client
+export async function getPortfolioWorkBySlug(slug: string, isPreview: boolean) {
+  return getClient(isPreview)
     .fetch(
       `*[_type == "portfolioWork" && slug.current == $slug][0]`,
       { slug },
-      isEnabled
+      isPreview
         ? {
             perspective: "drafts",
             useCdn: false,
@@ -65,23 +43,3 @@ export async function getPortfolioWorkBySlug(slug: string, isEnabled: boolean) {
       return null;
     });
 }
-
-// export async function getPortfolioWorkBySlugTemp(slug: string) {
-//   return client.fetch(
-//     `*[_type == "portfolioWork" && slug.current == $slug][0] {
-//       _id, title, slug, status, year, excerpt,
-//       page[] {
-//         ...,
-//         content[] {
-//           ...,
-//           image { ..., asset-> },
-//           audioFile { ..., asset-> },
-//           videoFile { ..., asset-> },
-//         }
-//       },
-//       tags[]->{ label, slug },
-//       seo
-//     }`,
-//     { slug },
-//   );
-// }

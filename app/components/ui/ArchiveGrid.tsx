@@ -2,11 +2,11 @@ import clsx from "clsx";
 import { ArchiveImage } from "./ArchiveImage";
 import Link from "next/link";
 import getImageUrl from "@/lib/sanity/utils";
-import { WorkItemData } from "@/lib/sanity/types";
 import { PortableText } from "next-sanity";
+import { PortfolioWork } from "@/lib/sanity/types/portfolio";
 
 type ArchiveGridProps = {
-  items: WorkItemData[];
+  items: PortfolioWork[];
 };
 
 const layoutMap: { [key: string]: string } = {

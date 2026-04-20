@@ -1,11 +1,11 @@
-import { client } from "../client";
+import { client, getClient } from "../client";
 
 export async function getJournalPage() {
   return client.fetch(`*[_type == "journalPage"][0]`);
 }
 
 export async function getJournalPosts(isPreview: boolean) {
-  return client
+  return getClient(isPreview)
     .fetch(
       `
     *[_type == "journalPost"] | order(publishedAt desc) {
@@ -27,7 +27,7 @@ export async function getJournalPosts(isPreview: boolean) {
 }
 
 export async function getJournalPostBySlug(slug: string, isPreview = false) {
-  return client.fetch(
+  return getClient(isPreview).fetch(
     `*[_type == "journalPost" && slug.current == $slug][0] {
       _id, title, slug, publishedAt, body, tags[]->{ label, slug }, seo
     }`,

@@ -1,5 +1,5 @@
-import { PortableText } from "@portabletext/react";
 import { getUpcomingEvents } from "@/lib/sanity/queries";
+import { PortableText } from "next-sanity";
 
 export const revalidate = 60;
 
