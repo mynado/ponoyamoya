@@ -9,9 +9,11 @@ import { draftMode } from "next/headers";
 export default async function PracticePage() {
   const { isEnabled } = await draftMode();
   console.log("Draft Mode Enabled:", isEnabled);
-  const page = await getPortfolioPage();
-  const allPosts = await getPortfolioWorks(isEnabled);
-  console.log("All Practice Posts:", allPosts);
+  const [page, allWorks] = await Promise.all([
+    getPortfolioPage(),
+    getPortfolioWorks(isEnabled),
+  ]);
+  console.log("All Practice Posts:", allWorks);
   return (
     <div className="flex flex-col items-center justify-center gap-10 mt-16">
       <div className="max-w-7xl mx-auto w-full px-4">
@@ -23,7 +25,7 @@ export default async function PracticePage() {
       </div>
 
       {/* Archive Grid */}
-      <ArchiveGrid items={allPosts} />
+      <ArchiveGrid items={allWorks} />
     </div>
   );
 }

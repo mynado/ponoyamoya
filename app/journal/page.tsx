@@ -5,13 +5,14 @@ import { stegaClean } from "@sanity/client/stega";
 import { getJournalPage, getJournalPosts } from "@/lib/sanity/queries/journal";
 import { PortableText } from "next-sanity";
 import { JournalPost } from "@/lib/sanity/types/journal";
-import { JournalPostData } from "@/lib/sanity/types";
 
 export default async function Journal() {
   const { isEnabled } = await draftMode();
   console.log("Draft Mode Enabled:", isEnabled);
-  const page = await getJournalPage();
-  const allPosts = await getJournalPosts(isEnabled);
+  const [page, allPosts] = await Promise.all([
+    getJournalPage(),
+    getJournalPosts(isEnabled),
+  ]);
   console.log("All Journal Posts:", allPosts);
   // TODO: fix journalPost type
   return (
@@ -22,7 +23,7 @@ export default async function Journal() {
         </h1>
         <PortableText value={page.intro[0]} />
         <ul className="mt-8">
-          {allPosts.map((post: JournalPostData) => (
+          {allPosts.map((post: JournalPost) => (
             <li key={post._id} className="my-12">
               <Card postData={post}>
                 <Link href={`/journal/${post.slug.current}`}>
