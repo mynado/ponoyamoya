@@ -1,7 +1,16 @@
 import { client, getClient } from "../client";
 
 export async function getPortfolioPage() {
-  return client.fetch(`*[_type == "portfolioPage"][0]`);
+  return client
+    .fetch(
+      `*[_type == "portfolioPage"][0]`,
+      {},
+      { next: { tags: ["portfolioPage"] } },
+    )
+    .catch((error) => {
+      console.error("Error fetching practice page:", error);
+      return null;
+    });
 }
 
 export async function getPortfolioWorks(isPreview: boolean) {
@@ -18,11 +27,11 @@ export async function getPortfolioWorks(isPreview: boolean) {
             perspective: "drafts",
             useCdn: false,
           }
-        : undefined,
+        : { next: { tags: ["portfolioWork"] } },
     )
     .catch((error) => {
       console.error("Error fetching journal posts:", error);
-      return [];
+      return null;
     });
 }
 
@@ -36,7 +45,7 @@ export async function getPortfolioWorkBySlug(slug: string, isPreview: boolean) {
             perspective: "drafts",
             useCdn: false,
           }
-        : undefined,
+        : { next: { tags: ["portfolioWork", `portfolioWork:${slug}`] } },
     )
     .catch((error) => {
       console.error(`Error fetching journal post with slug "${slug}":`, error);
