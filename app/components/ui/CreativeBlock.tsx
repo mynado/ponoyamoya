@@ -38,18 +38,17 @@ const creativeBlockComponents = {
       }
       return null;
     },
-    // pullQuote: ({ value }) => (
-    //   <blockquote>
-    //     <p>{value.text}</p>
-    //     {value.attribution && <cite>{value.attribution}</cite>}
-    //   </blockquote>
-    // ),
+    pullQuote: ({ value }: { value: { text: string } }) => (
+      <blockquote>
+        <cite>{value.text}</cite>
+      </blockquote>
+    ),
+    size: () => <hr></hr>,
   },
 };
 
 export default function CreativeBlock({ block }: { block: CreativeBlockData }) {
   console.log("CreativeBlockData: ", block);
-
   return (
     <div className={clsx(contentLayout[block.layout])}>
       {block.content?.length > 0 && (
