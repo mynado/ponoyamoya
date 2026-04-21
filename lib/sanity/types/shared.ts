@@ -22,7 +22,7 @@ export interface MediaBlock {
   audioFile?: { asset: { url: string } };
   embedUrl?: string;
   caption?: string;
-  alt?: string;
+  alt: string;
 }
 
 export interface CreativeBlockData {

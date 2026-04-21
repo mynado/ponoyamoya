@@ -10,7 +10,14 @@ const contentLayout: { [key: string]: string } = {
   left: "mr-auto max-w-[60%]",
   right: "ml-auto max-w-[60%]",
   twoCol: "grid grid-cols-2 gap-4",
-  collage: "relative", // TODO: be creative with the collage
+  collage:
+    "relative max-w-7xl w-full px-4 grid grid-cols-2 md:grid-cols-4 auto-rows-[180px] md:auto-rows-[220px] gap-4", // TODO: be creative with the collage
+};
+
+const spaceStyle: { [key: string]: string } = {
+  small: "h-1 w-1/4",
+  medium: "h-1 w-1/2",
+  large: "h-1 w-full",
 };
 
 const creativeBlockComponents = {
@@ -20,7 +27,7 @@ const creativeBlockComponents = {
         return (
           <Image
             src={urlFor(value.image.asset._ref).width(1200).height(630).url()}
-            alt={value.image.alt}
+            alt={value.alt}
             width={1200} //TODO: What size?? Maybe from cms?
             height={600}
             className="w-full"
@@ -43,7 +50,9 @@ const creativeBlockComponents = {
         <cite>{value.text}</cite>
       </blockquote>
     ),
-    size: () => <hr></hr>,
+    spacer: ({ value }: { value: { size: string } }) => (
+      <hr className={clsx(spaceStyle[value.size], "bg-spiritblue")}></hr>
+    ),
   },
 };
 
