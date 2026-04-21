@@ -2,7 +2,7 @@ import ArchiveGrid from "@/components/ui/ArchiveGrid";
 import {
   getPortfolioPage,
   getPortfolioWorks,
-} from "@/lib/sanity/queries/portfolio";
+} from "@/lib/sanity/queries/index";
 import { PortableText } from "next-sanity";
 import { draftMode } from "next/headers";
 

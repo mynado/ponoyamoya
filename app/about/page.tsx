@@ -1,4 +1,4 @@
-import { getAboutPage } from "@/lib/sanity/queries/pages";
+import { getAboutPage } from "@/lib/sanity/queries/index";
 import { PortableText } from "next-sanity";
 
 export default async function AboutPage() {

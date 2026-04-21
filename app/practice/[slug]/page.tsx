@@ -1,6 +1,6 @@
 import CreativeBlock from "@/components/ui/CreativeBlock";
-import { getPortfolioWorkBySlug } from "@/lib/sanity/queries/portfolio";
-import { CreativeBlockData } from "@/lib/sanity/types/shared";
+import { getPortfolioWorkBySlug } from "@/lib/sanity/queries/index";
+import { CreativeBlockData } from "@/lib/sanity/types/index";
 import { draftMode } from "next/headers";
 
 export default async function PracticePage({

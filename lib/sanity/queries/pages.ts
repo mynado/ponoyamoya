@@ -1,5 +1,5 @@
 import { client } from "../client";
-import { AboutPageData, ContactPageData, SiteSettings } from "../types/pages";
+import { AboutPageData, ContactPageData, SiteSettings } from "../types/index";
 
 export async function getSiteSettings(): Promise<SiteSettings | null> {
   return client

@@ -1,4 +1,4 @@
-import { JournalPost, JournalPostPreview } from "@/lib/sanity/types/journal";
+import { JournalPost, JournalPostPreview } from "@/lib/sanity/types/index";
 import clsx from "clsx";
 import { ReactNode } from "react";
 
@@ -14,7 +14,7 @@ export default function Card({
   postData,
 }: {
   children: ReactNode;
-  postData: JournalPostPreview | JournalPost;
+  postData: JournalPostPreview | JournalPost; // TODO: More generic type or More specific name for component
 }) {
   return (
     <article className="flex flex-col gap-1">

@@ -1,13 +1,13 @@
 import "./globals.css";
-import Header from "./components/Header";
-import FooterWrapper from "./components/FooterWrapper";
 import { Metadata } from "next";
 import { draftMode } from "next/headers";
-import { DisableDraftMode } from "./components/DisableDraftMode";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { Work_Sans, Lora } from "next/font/google";
-import { getSiteSettings } from "./lib/sanity/queries/pages";
-import { urlFor } from "./lib/sanity/utils";
+import { getSiteSettings } from "@/lib/sanity/queries/index";
+import { urlFor } from "@/lib/sanity/utils";
+import { DisableDraftMode } from "@/components/DisableDraftMode";
+import Header from "@/components/Header";
+import FooterWrapper from "@/components/FooterWrapper";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -25,21 +25,23 @@ const workSans = Work_Sans({
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
-  const { defaultSeo, siteName } = settings;
 
   return {
     title: {
-      default: siteName ?? "Pono ya Moya",
-      template: `%s — ${siteName ?? "Pono ya Moya"}`,
+      default: settings?.siteName ?? "Pono ya Moya",
+      template: `%s — ${settings?.siteName ?? "Pono ya Moya"}`,
     },
-    description: defaultSeo?.metaDescription,
+    description: settings?.defaultSeo?.metaDescription,
     openGraph: {
-      siteName: siteName ?? undefined,
+      siteName: settings?.siteName ?? undefined,
       type: "website",
-      ...(defaultSeo?.ogImage && {
+      ...(settings?.defaultSeo?.ogImage && {
         images: [
           {
-            url: urlFor(defaultSeo.ogImage).width(1200).height(630).url(),
+            url: urlFor(settings?.defaultSeo.ogImage)
+              .width(1200)
+              .height(630)
+              .url(),
             width: 1200,
             height: 630,
           },

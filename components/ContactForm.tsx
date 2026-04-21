@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import Button from "@/components/Button";
-import Dropdown from "@/components/Dropdown";
-import Input from "@/components/Input";
-import TextArea from "@/components/TextArea";
-import InlineError from "@/components/InlineError";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import Dropdown from "./ui/Dropdown";
+import Input from "./ui/Input";
+import TextArea from "./ui/TextArea";
+import InlineError from "./ui/InlineError";
+import LoadingSpinner from "./ui/LoadingSpinner";
+import Button from "./ui/Button";
 
 type FormField = { value: string; isError: boolean };
 type FormData = {

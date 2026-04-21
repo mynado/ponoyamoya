@@ -3,7 +3,8 @@
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useDraftModeEnvironment } from "next-sanity/hooks";
-import { disableDraftMode } from "@/actions";
+import Button from "./ui/Button";
+import { disableDraftMode } from "@/app/actions";
 
 export function DisableDraftMode() {
   const router = useRouter();
@@ -26,9 +27,9 @@ export function DisableDraftMode() {
       {pending ? (
         "Disabling draft mode..."
       ) : (
-        <button type="button" onClick={disable}>
+        <Button type="button" onClick={disable}>
           Disable draft mode
-        </button>
+        </Button>
       )}
     </div>
   );

@@ -1,28 +1,19 @@
 "use client";
 import { useState } from "react";
-import InlineError from "@/components/InlineError";
+import InlineError from "./InlineError";
 
-type DropdownOption = {
-  value: string;
-  label: string;
-  disabled?: boolean;
-  hidden?: boolean;
-};
-
-type DropdownProps = {
-  dropdownOptions?: DropdownOption[];
+type InputProps = {
   labelText?: string;
   className?: string;
   error?: { message: string; isError: boolean };
-} & React.SelectHTMLAttributes<HTMLSelectElement>;
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
-export default function Dropdown({
-  dropdownOptions = [],
+export default function Input({
   labelText,
   className = "",
   error = { message: "", isError: false },
   ...rest
-}: DropdownProps) {
+}: InputProps) {
   const [isDirty, setIsDirty] = useState(false);
 
   const showError = isDirty && error.isError;
@@ -36,33 +27,20 @@ export default function Dropdown({
         </label>
       )}
 
-      <select
+      <input
         {...rest}
         onBlur={() => setIsDirty(true)}
         aria-invalid={error.isError}
         className={`
           bg-white
+          px-2 py-1
           w-full
-          h-9
-          px-2
           transition-colors
           ${showError ? "border-red-600" : ""}
           ${showValid ? "border-green-600" : ""}
           ${className}
         `}
-      >
-        {dropdownOptions.map((option) => (
-          <option
-            key={option.value}
-            value={option.value}
-            disabled={option.disabled}
-            hidden={option.hidden}
-            className="disabled:text-slate-600"
-          >
-            {option.label}
-          </option>
-        ))}
-      </select>
+      />
 
       {error.isError && isDirty && <InlineError>{error.message}</InlineError>}
     </div>

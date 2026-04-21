@@ -1,5 +1,5 @@
 "use client";
-import InlineError from "@/components/InlineError";
+import InlineError from "./InlineError";
 import { useState } from "react";
 
 type TextAreaProps = {

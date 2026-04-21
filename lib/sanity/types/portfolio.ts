@@ -8,18 +8,6 @@ import {
   TagData,
 } from "./shared";
 
-export interface MediaBlock {
-  _type: "mediaBlock";
-  _key: string;
-  type: "image" | "video" | "audio" | "embed";
-  image?: SanityImageAsset;
-  videoFile?: { asset: { url: string } };
-  audioFile?: { asset: { url: string } };
-  embedUrl?: string;
-  caption?: string;
-  alt?: string;
-}
-
 export interface PortfolioWork extends BaseData {
   _type: "portfolioWork";
   _key: string;

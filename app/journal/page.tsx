@@ -1,10 +1,10 @@
 import { draftMode } from "next/headers";
 import Link from "next/link";
-import Card from "@/components/Card";
 import { stegaClean } from "@sanity/client/stega";
-import { getJournalPage, getJournalPosts } from "@/lib/sanity/queries/journal";
 import { PortableText } from "next-sanity";
-import { JournalPost, JournalPostPreview } from "@/lib/sanity/types/journal";
+import { getJournalPage, getJournalPosts } from "@/lib/sanity/queries/index";
+import { JournalPost, JournalPostPreview } from "@/lib/sanity/types/index";
+import Card from "@/components/ui/Card";
 
 export default async function Journal() {
   const { isEnabled } = await draftMode();

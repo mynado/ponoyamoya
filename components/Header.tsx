@@ -1,12 +1,16 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import Button from "./Button";
-import { SiteSettings } from "@/lib/sanity/types/pages";
+import Button from "./ui/Button";
+import { SiteSettings } from "@/lib/sanity/types/index";
 
-export default function Header({ settings }: { settings: SiteSettings }) {
+export default function Header({
+  settings,
+}: {
+  settings: SiteSettings | null;
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  const navigation = settings.navigation!;
+  const navigation = settings?.navigation || [];
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);

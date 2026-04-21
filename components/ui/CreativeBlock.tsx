@@ -1,4 +1,4 @@
-import { CreativeBlockData, MediaBlock } from "@/lib/sanity/types/shared";
+import { CreativeBlockData, MediaBlock } from "@/lib/sanity/types/index";
 import { urlFor } from "@/lib/sanity/utils";
 import clsx from "clsx";
 import { PortableText } from "next-sanity";

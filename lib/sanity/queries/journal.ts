@@ -3,7 +3,7 @@ import {
   JournalPageData,
   JournalPost,
   JournalPostPreview,
-} from "../types/journal";
+} from "../types/index";
 
 export async function getJournalPage(): Promise<JournalPageData | null> {
   return client

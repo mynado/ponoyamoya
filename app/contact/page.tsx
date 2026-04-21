@@ -1,10 +1,10 @@
 import ContactForm from "@/components/ContactForm";
+import { getContactPage } from "@/lib/sanity/queries/index";
 import {
   PortableText,
   PortableTextBlock,
   PortableTextComponentProps,
 } from "next-sanity";
-import { getContactPage } from "@/lib/sanity/queries/pages";
 
 const portableTextComponents = {
   listItem: {

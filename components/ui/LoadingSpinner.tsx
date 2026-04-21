@@ -1,6 +1,6 @@
 "use client";
 
-import Spinner from "@/icons/spinner";
+import Spinner from "../../icons/spinner";
 
 export default function LoadingSpinner({ className = "", ...rest }) {
   return (

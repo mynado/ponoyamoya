@@ -3,7 +3,7 @@ import {
   PortfolioPageData,
   PortfolioWork,
   PortfolioWorkPreview,
-} from "../types/portfolio";
+} from "../types/index";
 
 export async function getPortfolioPage(): Promise<PortfolioPageData | null> {
   return client
