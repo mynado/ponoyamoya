@@ -10,8 +10,7 @@ const contentLayout: { [key: string]: string } = {
   left: "mr-auto max-w-[60%]",
   right: "ml-auto max-w-[60%]",
   twoCol: "grid grid-cols-2 gap-4",
-  collage:
-    "relative max-w-7xl w-full px-4 grid grid-cols-2 md:grid-cols-4 auto-rows-[180px] md:auto-rows-[220px] gap-4", // TODO: be creative with the collage
+  collage: "", // TODO: be creative with the collage
 };
 
 const spaceStyle: { [key: string]: string } = {
@@ -45,11 +44,6 @@ const creativeBlockComponents = {
       }
       return null;
     },
-    pullQuote: ({ value }: { value: { text: string } }) => (
-      <blockquote>
-        <cite>{value.text}</cite>
-      </blockquote>
-    ),
     spacer: ({ value }: { value: { size: string } }) => (
       <hr className={clsx(spaceStyle[value.size], "bg-spiritblue")}></hr>
     ),
@@ -59,7 +53,7 @@ const creativeBlockComponents = {
 export default function CreativeBlock({ block }: { block: CreativeBlockData }) {
   console.log("CreativeBlockData: ", block);
   return (
-    <div className={clsx(contentLayout[block.layout])}>
+    <div className={clsx(contentLayout[block.layout], "prose")}>
       {block.content?.length > 0 && (
         <PortableText
           value={block.content}

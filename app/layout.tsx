@@ -13,6 +13,7 @@ const lora = Lora({
   subsets: ["latin"],
   variable: "--font-lora",
   weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -20,6 +21,7 @@ const workSans = Work_Sans({
   subsets: ["latin"],
   variable: "--font-work-sans",
   weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
