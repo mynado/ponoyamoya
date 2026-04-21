@@ -1,17 +1,5 @@
 import { client } from "./client";
-import { EventData, OfferingsData, PageData } from "./types";
-
-// Pages
-export async function getPage(heading: string): Promise<PageData | null> {
-  return client
-    .fetch(`*[_type == "pages" && heading == $heading][0]`, {
-      heading,
-    })
-    .catch((error) => {
-      console.error(`Error fetching page with heading "${heading}":`, error);
-      return null;
-    });
-}
+import { EventData, OfferingsData } from "./types";
 
 // Events
 export async function getUpcomingEvents(): Promise<EventData[]> {

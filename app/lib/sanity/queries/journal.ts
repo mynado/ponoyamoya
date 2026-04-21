@@ -1,4 +1,5 @@
 import { client, getClient } from "../client";
+import { JournalPost } from "../types/journal";
 
 export async function getJournalPage() {
   return client
@@ -35,11 +36,14 @@ export async function getJournalPosts(isPreview: boolean) {
     });
 }
 
-export async function getJournalPostBySlug(slug: string, isPreview = false) {
+export async function getJournalPostBySlug(
+  slug: string,
+  isPreview = false,
+): Promise<JournalPost> {
   return getClient(isPreview)
     .fetch(
       `*[_type == "journalPost" && slug.current == $slug][0] {
-        _id, title, slug, publishedAt, body, tags[]->{ label, slug }, seo
+        _id, title, slug, publishedAt, body, coverImage { ..., asset-> }, tags[]->{ label, slug }, seo,
       }`,
       { slug },
       isPreview

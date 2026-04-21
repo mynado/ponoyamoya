@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { ArchiveImage } from "./ArchiveImage";
 import Link from "next/link";
-import { PortableText } from "next-sanity";
 import { PortfolioWork } from "@/lib/sanity/types/portfolio";
 import { urlFor } from "@/lib/sanity/utils";
 type ArchiveGridProps = {
@@ -66,10 +65,10 @@ export default function ArchiveGrid({ items = [] }: ArchiveGridProps) {
                 <div className="flex gap-2 mt-3 flex-wrap">
                   {item.tags?.map((tag) => (
                     <span
-                      key={tag._key}
+                      key={tag._id}
                       className="text-[10px] uppercase tracking-wider text-white/50"
                     >
-                      <PortableText value={tag} />
+                      {tag.label}
                     </span>
                   ))}
                 </div>

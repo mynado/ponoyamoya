@@ -1,12 +1,11 @@
-import { getPage } from "@/lib/sanity/queries";
 import ContactForm from "@/components/ContactForm";
 import {
   PortableText,
   PortableTextBlock,
   PortableTextComponentProps,
 } from "next-sanity";
+import { getContactPage } from "@/lib/sanity/queries/pages";
 
-// PortableText components
 const portableTextComponents = {
   listItem: {
     bullet: (props: PortableTextComponentProps<PortableTextBlock>) => (
@@ -19,17 +18,17 @@ const portableTextComponents = {
 };
 
 export default async function ContactPage() {
-  const pageData = await getPage("Contact");
+  const pageData = await getContactPage();
 
   return (
     <div className="mt-16 flex flex-col w-full items-center justify-center gap-4">
       <div className="max-w-(--breakpoint-md) mx-auto w-full px-4">
         <h1 className="text-4xl md:text-5xl font-display font-medium mb-6 text-foreground animate-fade-in">
-          {pageData?.heading || "Contact"}
+          {pageData.title || "Contact"}
         </h1>
-        {pageData?.content && (
+        {pageData.additionalInfo && (
           <PortableText
-            value={pageData.content}
+            value={pageData.additionalInfo}
             components={portableTextComponents}
           />
         )}

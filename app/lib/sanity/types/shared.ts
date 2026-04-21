@@ -41,6 +41,7 @@ export interface SanitySlug {
 export interface SanityImageAsset {
   _type: "image";
   asset: {
+    _id: string;
     _ref: string;
     url: string;
   };

@@ -1,5 +1,5 @@
 import { CreativeBlockData, MediaBlock } from "@/lib/sanity/types/shared";
-import { getImageUrl } from "@/lib/sanity/utils";
+import { urlFor } from "@/lib/sanity/utils";
 import clsx from "clsx";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
@@ -19,7 +19,7 @@ const creativeBlockComponents = {
       if (value.type === "image" && value.image) {
         return (
           <Image
-            src={getImageUrl(value.image.asset._ref)}
+            src={urlFor(value.image.asset._ref).width(1200).height(630).url()}
             alt={value.image.alt}
             width={1200} //TODO: What size?? Maybe from cms?
             height={600}

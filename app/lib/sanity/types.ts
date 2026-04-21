@@ -1,11 +1,6 @@
 import { PortableTextBlock } from "@portabletext/types";
 import { BaseData } from "./types/shared";
 
-export interface PageData extends BaseData {
-  heading: string;
-  content: PortableTextBlock[];
-}
-
 export interface EventData extends BaseData {
   name: string;
   startTime: string;

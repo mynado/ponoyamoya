@@ -2,7 +2,6 @@ import { draftMode } from "next/headers";
 import Image from "next/image";
 import { getJournalPostBySlug } from "@/lib/sanity/queries/journal";
 import { PortableText } from "next-sanity";
-import { getImageUrl } from "@/lib/sanity/utils";
 
 export default async function JournalPage({
   params,
@@ -13,34 +12,41 @@ export default async function JournalPage({
   const { isEnabled } = await draftMode();
   console.log("Journal Page Slug:", slug, "Draft Mode Enabled:", isEnabled);
   const pageData = await getJournalPostBySlug(slug, isEnabled);
+  console.log("journal page post: ", pageData);
   return (
-    <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8 max-w-4xl mx-auto">
-      {pageData?.heroImage && (
-        <Image
-          src={getImageUrl(pageData.heroImage.asset._ref)}
-          alt={pageData.heroImage.alt}
-          width={1920}
-          height={1080}
-        />
-      )}
-      <div className="max-w-(--breakpoint-md) mx-auto w-full">
-        <h1 className="text-center text-4xl font-bold mb-4">
-          {pageData?.title}
-        </h1>
-        {pageData?.publishedAt && (
-          <p className="text-gray-600">
-            {new Date(pageData?.publishedAt).toLocaleDateString("en-SE", {
-              weekday: "long",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </p>
-        )}
-        <div className="max-w-[var(--breakpoint-md)] text-lg md:text-xl w-full">
-          {pageData?.body && <PortableText value={pageData.body} />}
+    <>
+      {pageData ? (
+        <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8 max-w-4xl mx-auto">
+          {pageData.coverImage && (
+            <Image
+              src={pageData.coverImage.asset.url}
+              alt={pageData.coverImage.alt ? pageData.coverImage.alt : ""}
+              width={1920}
+              height={1080}
+            />
+          )}
+          <div className="max-w-(--breakpoint-md) mx-auto w-full">
+            <h1 className="text-center text-4xl font-bold mb-4">
+              {pageData.title}
+            </h1>
+            {pageData.publishedAt && (
+              <p className="text-gray-600">
+                {new Date(pageData?.publishedAt).toLocaleDateString("en-SE", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </p>
+            )}
+            <div className="max-w-[var(--breakpoint-md)] text-lg md:text-xl w-full">
+              {pageData.body && <PortableText value={pageData.body} />}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div>Could not load content</div>
+      )}
+    </>
   );
 }
