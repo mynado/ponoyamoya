@@ -1,10 +1,13 @@
 import clsx from "clsx";
 import { ArchiveImage } from "./ArchiveImage";
 import Link from "next/link";
-import { PortfolioWork } from "@/lib/sanity/types/portfolio";
+import {
+  PortfolioWork,
+  PortfolioWorkPreview,
+} from "@/lib/sanity/types/portfolio";
 import { urlFor } from "@/lib/sanity/utils";
 type ArchiveGridProps = {
-  items: PortfolioWork[];
+  items: PortfolioWork[] | PortfolioWorkPreview[];
 };
 
 const layoutMap: { [key: string]: string } = {

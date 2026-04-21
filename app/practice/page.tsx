@@ -19,13 +19,13 @@ export default async function PracticePage() {
       <div className="max-w-7xl mx-auto w-full px-4">
         <div className="h-[2px] w-10 bg-spiritred mb-8" />
         <h1 className="text-4xl md:text-5xl font-display font-medium mb-6">
-          {page.title}
+          {page?.title || "Practice"}
         </h1>
-        <PortableText value={page.intro[0]} />
+        {page?.intro && <PortableText value={page.intro} />}
       </div>
 
       {/* Archive Grid */}
-      <ArchiveGrid items={allWorks} />
+      {allWorks && <ArchiveGrid items={allWorks} />}
     </div>
   );
 }

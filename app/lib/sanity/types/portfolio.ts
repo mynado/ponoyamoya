@@ -1,6 +1,7 @@
 import type { PortableTextBlock } from "@portabletext/types";
 import {
   BaseData,
+  CreativeBlockData,
   SanityImageAsset,
   SanitySlug,
   SeoData,
@@ -19,17 +20,9 @@ export interface MediaBlock {
   alt?: string;
 }
 
-export interface CreativeBlock {
-  _type: "creativeBlock";
-  _key: string;
-  layout: "full" | "narrow" | "left" | "right" | "twoCol" | "collage";
-  backgroundColor?: string;
-  content: (PortableTextBlock | MediaBlock)[];
-}
-
 export interface PortfolioWork extends BaseData {
-  _id: string;
   _type: "portfolioWork";
+  _key: string;
   title: string;
   slug: SanitySlug;
   status: "ongoing" | "fragment" | "completed";
@@ -37,7 +30,7 @@ export interface PortfolioWork extends BaseData {
   thumbnail: SanityImageAsset;
   excerpt?: string;
   tags?: TagData[];
-  page: CreativeBlock[];
+  page: CreativeBlockData[];
   seo?: SeoData;
 }
 

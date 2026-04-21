@@ -1,6 +1,11 @@
 import { client, getClient } from "../client";
+import {
+  PortfolioPageData,
+  PortfolioWork,
+  PortfolioWorkPreview,
+} from "../types/portfolio";
 
-export async function getPortfolioPage() {
+export async function getPortfolioPage(): Promise<PortfolioPageData | null> {
   return client
     .fetch(
       `*[_type == "portfolioPage"][0]`,
@@ -13,7 +18,9 @@ export async function getPortfolioPage() {
     });
 }
 
-export async function getPortfolioWorks(isPreview: boolean) {
+export async function getPortfolioWorks(
+  isPreview: boolean,
+): Promise<PortfolioWork[] | PortfolioWorkPreview[] | null> {
   return getClient(isPreview)
     .fetch(
       `
@@ -35,7 +42,10 @@ export async function getPortfolioWorks(isPreview: boolean) {
     });
 }
 
-export async function getPortfolioWorkBySlug(slug: string, isPreview: boolean) {
+export async function getPortfolioWorkBySlug(
+  slug: string,
+  isPreview: boolean,
+): Promise<PortfolioWork | null> {
   return getClient(isPreview)
     .fetch(
       `*[_type == "portfolioWork" && slug.current == $slug][0]`,

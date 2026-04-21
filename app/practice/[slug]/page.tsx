@@ -15,11 +15,10 @@ export default async function PracticePage({
   console.log("Practice Post Data: ", pageData);
   return (
     <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8 max-w-4xl mx-auto">
-      {pageData && pageData.page ? (
+      <h1>{pageData?.title}</h1>
+      {pageData?.page ? (
         pageData.page.map((item: CreativeBlockData) => (
-          <div key={item._key}>
-            <CreativeBlock block={item} />
-          </div>
+          <CreativeBlock key={item._key} block={item} />
         ))
       ) : (
         <p>no data</p>

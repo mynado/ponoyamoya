@@ -1,6 +1,7 @@
 import { client } from "../client";
+import { AboutPageData, ContactPageData, SiteSettings } from "../types/pages";
 
-export async function getSiteSettings() {
+export async function getSiteSettings(): Promise<SiteSettings | null> {
   return client
     .fetch(
       `*[_type == "siteSettings"][0]`,
@@ -13,7 +14,7 @@ export async function getSiteSettings() {
     });
 }
 
-export async function getAboutPage() {
+export async function getAboutPage(): Promise<AboutPageData | null> {
   return client
     .fetch(`*[_type == "aboutPage"][0]`, {}, { next: { tags: ["aboutPage"] } })
     .catch((error) => {
@@ -22,7 +23,7 @@ export async function getAboutPage() {
     });
 }
 
-export async function getContactPage() {
+export async function getContactPage(): Promise<ContactPageData | null> {
   return client
     .fetch(
       `*[_type == "contactPage"][0]`,

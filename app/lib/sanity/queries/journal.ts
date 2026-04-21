@@ -1,7 +1,11 @@
 import { client, getClient } from "../client";
-import { JournalPost } from "../types/journal";
+import {
+  JournalPageData,
+  JournalPost,
+  JournalPostPreview,
+} from "../types/journal";
 
-export async function getJournalPage() {
+export async function getJournalPage(): Promise<JournalPageData | null> {
   return client
     .fetch(
       `*[_type == "journalPage"][0]`,
@@ -14,7 +18,9 @@ export async function getJournalPage() {
     });
 }
 
-export async function getJournalPosts(isPreview: boolean) {
+export async function getJournalPosts(
+  isPreview: boolean,
+): Promise<JournalPostPreview[] | null> {
   return getClient(isPreview)
     .fetch(
       `
@@ -39,7 +45,7 @@ export async function getJournalPosts(isPreview: boolean) {
 export async function getJournalPostBySlug(
   slug: string,
   isPreview = false,
-): Promise<JournalPost> {
+): Promise<JournalPost | null> {
   return getClient(isPreview)
     .fetch(
       `*[_type == "journalPost" && slug.current == $slug][0] {
