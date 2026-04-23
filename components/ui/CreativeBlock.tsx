@@ -5,11 +5,11 @@ import { PortableText } from "next-sanity";
 import Image from "next/image";
 
 const contentLayout: { [key: string]: string } = {
-  full: "w-full",
-  narrow: "max-w-7xl mx-auto w-full px-4",
+  full: "w-full max-w-7xl mx-auto",
+  narrow: "max-w-3xl mx-auto w-full px-4",
   left: "mr-auto max-w-[60%]",
   right: "ml-auto max-w-[60%]",
-  twoCol: "grid grid-cols-2 gap-4",
+  twoCol: "grid grid-cols-2 gap-4 w-full max-w-7xl",
   collage: "", // TODO: be creative with the collage
 };
 
@@ -23,12 +23,18 @@ const creativeBlockComponents = {
   types: {
     mediaBlock: ({ value }: { value: MediaBlock }) => {
       if (value.type === "image" && value.image) {
+        const width = value.image.asset.metadata.dimensions.width;
+        const height = value.image.asset.metadata.dimensions.height;
         return (
           <Image
-            src={urlFor(value.image.asset._ref).width(1200).height(630).url()}
+            src={urlFor(value.image.asset._id)
+              .width(width)
+              .height(height)
+              .url()}
             alt={value.alt}
-            width={1200} //TODO: What size?? Maybe from cms?
-            height={600}
+            width={width}
+            height={height}
+            loading="eager"
             className="w-full"
           />
         );
@@ -51,9 +57,8 @@ const creativeBlockComponents = {
 };
 
 export default function CreativeBlock({ block }: { block: CreativeBlockData }) {
-  console.log("CreativeBlockData: ", block);
   return (
-    <div className={clsx(contentLayout[block.layout], "prose")}>
+    <div className={clsx(contentLayout[block.layout], "prose font-body")}>
       {block.content?.length > 0 && (
         <PortableText
           value={block.content}

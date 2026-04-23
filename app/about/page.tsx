@@ -6,7 +6,7 @@ export default async function AboutPage() {
   console.log("about page data: ", pageData);
 
   return (
-    <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8">
+    <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8 font-body">
       <div className="max-w-(--breakpoint-md) mx-auto w-full">
         <h1 className="text-4xl md:text-5xl font-display font-medium mb-6 text-foreground animate-fade-in">
           {pageData?.title || "About"}

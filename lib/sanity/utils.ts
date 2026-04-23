@@ -19,3 +19,13 @@ export const getImageUrl = (imageRef: string) => {
   const [type, assetId, dimensions, format] = imageRef.split("-");
   return `${sanityCdnUrl}${assetId}-${dimensions}.${format}`;
 };
+
+export const getImageDimensions = (
+  imageRef: string,
+): { width: number; height: number } => {
+  const [type, assetId, dimensions, format] = imageRef.split("-");
+  const [w, h] = dimensions.split("x");
+  const width = Number(w);
+  const height = Number(h);
+  return { width, height };
+};

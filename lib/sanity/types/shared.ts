@@ -10,7 +10,13 @@ export type BaseData = {
 export type ImageData = {
   _type: string;
   alt: string;
-  asset: { _ref: string; _type: string };
+  asset: {
+    metadata: {
+      dimensions: { aspectRatio: number; height: number; width: number };
+    };
+    url: string;
+    _id: string;
+  };
 };
 
 export interface MediaBlock {

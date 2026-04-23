@@ -14,15 +14,31 @@ export default async function PracticePage({
   const pageData = await getPortfolioWorkBySlug(slug, isEnabled);
   console.log("Practice Post Data: ", pageData);
   return (
-    <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8 max-w-4xl mx-auto">
-      <h1>{pageData?.title}</h1>
-      {pageData?.page ? (
-        pageData.page.map((item: CreativeBlockData) => (
-          <CreativeBlock key={item._key} block={item} />
-        ))
+    <>
+      {pageData ? (
+        <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8 mx-auto font-body">
+          <div className="max-w-5xl w-full">
+            <div className="flex justify-between items-center gap-4 w-full text-sm mb-4">
+              <div className="flex items-center gap-4 uppercase">
+                <span>{pageData.status}</span>
+                {pageData.tags?.map((tag) => (
+                  <span key={tag._id}>{tag.label}</span>
+                ))}
+              </div>
+              <span>{pageData.year}</span>
+            </div>
+            <h1 className="text-4xl font-display font-bold mb-4">
+              {pageData.title}
+            </h1>
+            <p>{pageData.excerpt}</p>
+          </div>
+          {pageData.page.map((item: CreativeBlockData) => (
+            <CreativeBlock key={item._key} block={item} />
+          ))}
+        </div>
       ) : (
-        <p>no data</p>
+        <p>No data</p>
       )}
-    </div>
+    </>
   );
 }
