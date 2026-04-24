@@ -66,7 +66,7 @@ export default async function RootLayout({
       className={workSans.className}
     >
       <body
-        className={`${lora.className} bg-background-primary text-text-secondary min-h-screen flex flex-col`}
+        className={`bg-background-primary text-text-secondary min-h-screen flex flex-col`}
       >
         <Header settings={settings} />
         <main className="flex-1 mt-10">{children}</main>

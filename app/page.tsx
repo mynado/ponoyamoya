@@ -14,10 +14,10 @@ const Home = () => {
             <h2 className={`text-4xl font-bold group-hover:text-spiritblue`}>
               Ndumba
             </h2>
-            <p className="text-lg uppercase font-body text-stone-600">
+            <p className="text-lg uppercase text-stone-600">
               The healing space
             </p>
-            <p className="mt-4 font-body leading-relaxed text-stone-500">
+            <p className="mt-4 leading-relaxed text-stone-500">
               Ancestral consultations, herbal medicine, spiritual cleansing, and
               ceremony.
             </p>
@@ -32,10 +32,10 @@ const Home = () => {
             <h2 className={`text-4xl font-bold group-hover:text-spiritred`}>
               Practice
             </h2>
-            <p className="text-lg uppercase font-body text-stone-600">
+            <p className="text-lg uppercase text-stone-600">
               The creative space
             </p>
-            <p className="mt-4 font-body leading-relaxed text-stone-500">
+            <p className="mt-4 leading-relaxed text-stone-500">
               Past work and ongoing experiments across art, poetry, prose, and
               curated experiences.
             </p>

@@ -21,7 +21,7 @@ export default function Header({
       <nav
         className={`w-full flex flex-col items-center justify-center pr-2 pl-4 md:px-4 fixed top-0 backdrop-blur-xs z-50`}
       >
-        <div className="flex justify-between font-body items-center w-full">
+        <div className="flex justify-between items-center w-full">
           <Link href="/">
             <div className="text-spiritblue text-lg text-bold logo">
               moyabyssal
@@ -97,7 +97,7 @@ export default function Header({
                 <Link
                   href={item.path}
                   onClick={toggleMenu}
-                  className="text-white text-3xl tracking-widest font-body hover:opacity-60 transition-opacity duration-200"
+                  className="text-white text-3xl tracking-widest hover:opacity-60 transition-opacity duration-200"
                 >
                   {item.label}
                 </Link>

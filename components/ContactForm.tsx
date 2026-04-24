@@ -131,7 +131,7 @@ export default function ContactForm() {
       <form
         onSubmit={onSubmit}
         noValidate
-        className="flex flex-col gap-4 w-full font-body"
+        className="flex flex-col gap-4 w-full"
       >
         <Dropdown
           id="reason"

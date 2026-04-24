@@ -38,11 +38,11 @@ export default async function NdumbaPage() {
     <div className="flex flex-col items-center justify-center gap-8 mt-16">
       <div className="max-w-(--breakpoint-md) mx-auto w-full px-4">
         <div className="h-[2px] w-10 bg-spiritblue mb-8"></div>
-        <h1 className="text-4xl md:text-5xl font-display font-medium mb-6 text-foreground animate-fade-in">
+        <h1 className="text-4xl md:text-5xl font-medium mb-6 text-foreground animate-fade-in">
           Ndumba
         </h1>
         <p
-          className="text-lg font-body max-w-2xl leading-relaxed animate-fade-in"
+          className="text-lg max-w-2xl leading-relaxed animate-fade-in"
           style={{ animationDelay: "0.15s" }}
         >
           The ndumba is the sacred healing space — a room between worlds. Here,
@@ -58,27 +58,25 @@ export default async function NdumbaPage() {
             style={{ animationDelay: `${0.1 * (i + 1)}s` }}
           >
             <div>
-              <h2 className="text-2xl font-display font-medium mb-3 text-foreground">
+              <h2 className="text-2xl font-medium mb-3 text-foreground">
                 {offering.title}
               </h2>
-              <p className="font-body leading-relaxed max-w-lg">
-                {offering.description}
-              </p>
+              <p className="leading-relaxed max-w-lg">{offering.description}</p>
             </div>
-            <span className="text-sm text-primary font-body uppercase tracking-widest whitespace-nowrap">
+            <span className="text-sm text-primary uppercase tracking-widest whitespace-nowrap">
               {offering.duration}
             </span>
           </div>
         ))}
         <p
-          className="font-body border-t border-stone-200 pt-10 mb-8 text-lg leading-relaxed animate-fade-in"
+          className="border-t border-stone-200 pt-10 mb-8 text-lg leading-relaxed animate-fade-in"
           style={{ animationDelay: `${0.1 * (offerings.length + 1)}s` }}
         >
           To book a consultation or inquire about healing work:
         </p>
         <Link
           href="/contact"
-          className="uppercase border-1 border-spiritblack text-spiritblack block font-body py-2 px-4 w-max hover:border-spiritblue hover:text-spiritblue transition-colors"
+          className="uppercase border-1 border-spiritblack text-spiritblack block py-2 px-4 w-max hover:border-spiritblue hover:text-spiritblue transition-colors"
         >
           Get in touch
         </Link>

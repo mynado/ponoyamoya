@@ -58,7 +58,7 @@ const creativeBlockComponents = {
 
 export default function CreativeBlock({ block }: { block: CreativeBlockData }) {
   return (
-    <div className={clsx(contentLayout[block.layout], "prose font-body")}>
+    <div className={clsx(contentLayout[block.layout], "prose")}>
       {block.content?.length > 0 && (
         <PortableText
           value={block.content}

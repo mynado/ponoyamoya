@@ -18,7 +18,7 @@ export default async function Journal() {
   return (
     <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8">
       <div className="mx-auto max-w-3xl w-full">
-        <h1 className="text-4xl md:text-5xl font-display font-medium mb-6 text-foreground animate-fade-in">
+        <h1 className="text-4xl md:text-5xl font-medium mb-6 text-foreground animate-fade-in">
           {page?.title || "Journal"}
         </h1>
         {page?.intro && <PortableText value={page.intro} />}
@@ -28,7 +28,7 @@ export default async function Journal() {
               <li key={post._id} className="my-12">
                 <Card postData={post}>
                   <Link href={`/journal/${post.slug.current}`}>
-                    <h2 className="text-2xl md:text-3xl font-display font-medium my-4 text-foreground group-hover:text-primary transition-colors">
+                    <h2 className="text-2xl md:text-3xl font-medium my-4 text-foreground group-hover:text-primary transition-colors">
                       {post.title}
                     </h2>
                   </Link>

@@ -71,6 +71,7 @@ body {
   margin: 0;
   min-width: 320px;
   color: var(--color-text-secondary);
+  font-family: var(--font-body);
 }
 
 .logo {
