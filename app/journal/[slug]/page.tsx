@@ -2,6 +2,7 @@ import { draftMode } from "next/headers";
 import Image from "next/image";
 import { PortableText } from "next-sanity";
 import { getJournalPostBySlug } from "@/lib/sanity/queries/index";
+import { notFound } from "next/navigation";
 
 export default async function JournalPage({
   params,
@@ -13,9 +14,8 @@ export default async function JournalPage({
   console.log("Journal Page Slug:", slug, "Draft Mode Enabled:", isEnabled);
   const pageData = await getJournalPostBySlug(slug, isEnabled);
   console.log("journal page post: ", pageData);
+  if (!pageData) notFound();
   return (
-    <>
-      {pageData ? (
         <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8 max-w-4xl mx-auto">
           {pageData.coverImage && (
             <Image
@@ -44,9 +44,5 @@ export default async function JournalPage({
             </div>
           </div>
         </div>
-      ) : (
-        <div>Could not load content</div>
-      )}
-    </>
   );
 }
