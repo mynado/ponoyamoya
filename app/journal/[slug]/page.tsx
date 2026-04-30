@@ -39,7 +39,7 @@ export default async function JournalPage({
                 })}
               </p>
             )}
-            <div className="max-w-[var(--breakpoint-md)] text-[1.125rem] w-full prose">
+            <div className="max-w-[--breakpoint-md] text-[1.125rem] w-full prose">
               {pageData.body && <PortableText value={pageData.body} />}
             </div>
           </div>
