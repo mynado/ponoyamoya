@@ -40,7 +40,7 @@ export default async function JournalPage({
             <span key={tag._id}>{tag.label}</span>
           ))}
         </div>
-        <h1 className="text-6xl font-bold mb-4">{pageData.title}</h1>
+        <h1 className="text-4xl font-bold mb-4">{pageData.title}</h1>
       </div>
       {pageData.coverImage && (
         <Image

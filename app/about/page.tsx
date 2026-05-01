@@ -3,7 +3,6 @@ import { PortableText } from "next-sanity";
 
 export default async function AboutPage() {
   const pageData = await getAboutPage();
-  console.log("about page data: ", pageData);
 
   return (
     <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8">
@@ -12,8 +11,12 @@ export default async function AboutPage() {
           {pageData?.title || "About"}
         </h1>
       </div>
-      <div className="max-w-[var(--breakpoint-md)] w-full">
-        {pageData?.body && <PortableText value={pageData.body} />}
+      <div className="max-w-(--breakpoint-md) w-full prose">
+        {pageData?.body ? (
+          <PortableText value={pageData.body} />
+        ) : (
+          "Coming soon..."
+        )}
       </div>
     </div>
   );
