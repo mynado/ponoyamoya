@@ -1,7 +1,7 @@
 import {
   getOfferings,
   getOfferingsPageIntro,
-} from "@/lib/sanity/queries/offering";
+} from "@/lib/sanity/queries/index";
 import { PortableText } from "next-sanity";
 import Link from "next/link";
 
