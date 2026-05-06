@@ -18,6 +18,14 @@ export interface ContactPageData {
   seo?: SeoData;
 }
 
+export interface IntroPageData {
+  _type: string;
+  title?: string;
+  portraitImage?: SanityImageAsset;
+  intro?: PortableTextBlock[];
+  seo?: SeoData;
+}
+
 export interface SiteSettings {
   _type: "siteSettings";
   siteName?: string;
