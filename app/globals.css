@@ -38,6 +38,21 @@
     font-family: var(--font-display);
     color: var(--color-text-primary);
   }
+
+  h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+  p {
+    margin-bottom: 1rem;
+  }
 }
 
 * {

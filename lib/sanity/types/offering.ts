@@ -8,4 +8,13 @@ export interface Offering {
   price?: string;
   shortDescription?: string;
   title: string;
+  order: string;
+  pricing?: {
+    _key: string;
+    _type: "priceOption";
+    amount?: number;
+    currency?: string;
+    description?: string;
+    label?: string;
+  }[];
 }

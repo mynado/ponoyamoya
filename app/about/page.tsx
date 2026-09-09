@@ -3,6 +3,7 @@ import { PortableText } from "next-sanity";
 
 export default async function AboutPage() {
   const pageData = await getAboutPage();
+  console.log("pageData", pageData);
 
   return (
     <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8">
