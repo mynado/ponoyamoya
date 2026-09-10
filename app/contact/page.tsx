@@ -17,7 +17,12 @@ const portableTextComponents = {
   },
 };
 
-export default async function ContactPage() {
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
+  const { subject } = await searchParams;
   const pageData = await getContactPage();
   return (
     <div className="mt-16 flex flex-col w-full items-center justify-center gap-4">
@@ -35,7 +40,7 @@ export default async function ContactPage() {
         )}
       </div>
       <div className="max-w-(--breakpoint-md) mx-auto w-full mt-8 px-4">
-        <ContactForm />
+        <ContactForm subject={subject} />
       </div>
     </div>
   );

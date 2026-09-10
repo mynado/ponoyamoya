@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dropdown from "./ui/Dropdown";
 import Input from "./ui/Input";
 import TextArea from "./ui/TextArea";
@@ -17,9 +17,13 @@ type FormData = {
   message: FormField;
 };
 
-export default function ContactForm() {
+export default function ContactForm({
+  subject,
+}: {
+  subject: string | undefined;
+}) {
   const [formData, setFormData] = useState<FormData>({
-    reason: { value: "", isError: false },
+    reason: { value: subject ?? "", isError: false },
     other: { value: "", isError: false },
     name: { value: "", isError: false },
     email: { value: "", isError: false },
@@ -31,13 +35,29 @@ export default function ContactForm() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  useEffect(() => {
+    if (subject) {
+      setFormData((prev) => ({
+        ...prev,
+        reason: { value: subject, isError: false },
+      }));
+    }
+  }, [subject]);
+
   const dropdownOptions = [
     { value: "", label: "--- Select ---", disabled: true, hidden: true },
-    { value: "Consultation", label: "Consultation" },
-    { value: "Cleansing", label: "Cleansing and Home Fortification" },
-    { value: "Collective", label: "Collective offerings" },
-    { value: "Workshop", label: "Workshop" },
-    { value: "Other", label: "Other" },
+    { value: "connection-call", label: "Connection Call" },
+    { value: "consultations", label: "Consultations" },
+    {
+      value: "cleansing-and-home-fortification",
+      label: "Cleansing and Home Fortification",
+    },
+    {
+      value: "space-clearing-and-blessings",
+      label: "Space Clearing and Blessings",
+    },
+    { value: "collective-offerings", label: "Collective Offerings" },
+    { value: "other", label: "Other" },
   ];
 
   const onInputChange = (
@@ -146,7 +166,7 @@ export default function ContactForm() {
           }}
           required
         />
-        {formData.reason.value === "Other" && (
+        {formData.reason.value === "other" && (
           <Input
             id="other"
             name="other"

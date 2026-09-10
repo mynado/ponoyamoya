@@ -1,4 +1,5 @@
 import { PortableTextBlock } from "next-sanity";
+import { SanitySlug } from "./shared";
 
 export interface Offering {
   _createdAt: string;
@@ -13,6 +14,7 @@ export interface Offering {
   title: string;
   order: string;
   pricing?: PricingOption[];
+  slug: SanitySlug;
 }
 
 export interface PricingOption {

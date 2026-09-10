@@ -16,8 +16,8 @@ export default function Button({
   ...rest
 }: ButtonProps) {
   const typeSettings = {
-    primary: "bg-spiritblue text-white hover:bg-spiritblue-200 py-3 px-6 ",
-    secondary: "border-spiritblue bg-white text-spiritblue py-3 px-6 ",
+    primary: "bg-spiritblue text-white hover:bg-spiritblue-200 py-2 px-4 ",
+    secondary: "border-spiritblue bg-white text-spiritblue py-2 px-4 ",
     tertiary: "bg-transparent text-foreground border-none p-0 hover:underline",
   };
   return (

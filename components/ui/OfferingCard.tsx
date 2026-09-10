@@ -2,6 +2,7 @@
 import { Offering } from "@/lib/sanity/types/offering";
 import Button from "./Button";
 import { useState } from "react";
+import Link from "next/dist/client/link";
 
 export default function OfferingCard({
   data,
@@ -73,9 +74,17 @@ export default function OfferingCard({
           </span>
         ) : null}
       </div>
-      <span className="text-sm text-primary uppercase tracking-widest whitespace-nowrap">
-        {data.duration}
-      </span>
+      <div className="flex flex-col gap-4 items-end justify-between pt-2">
+        <span className="text-sm text-primary uppercase tracking-widest whitespace-nowrap">
+          {data.duration}
+        </span>
+        <Link
+          href={`/contact?subject=${data.slug.current}`}
+          className="uppercase border bg-spiritblue text-spiritwhite block py-2 px-4 w-max hover:border-spiritblue hover:opacity-90 transition-colors"
+        >
+          Book
+        </Link>
+      </div>
     </div>
   );
 }
