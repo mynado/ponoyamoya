@@ -1,3 +1,4 @@
+import OfferingCard from "@/components/ui/OfferingCard";
 import {
   getOfferings,
   getOfferingsPageIntro,
@@ -11,8 +12,6 @@ export default async function NdumbaPage() {
     getOfferings(),
   ]);
 
-  // TODO: fix order
-  // show prices, read more.
   console.log("offerings", offerings, "pageData", pageData);
   return (
     <div className="flex flex-col items-center justify-center gap-8 mt-16">
@@ -36,47 +35,7 @@ export default async function NdumbaPage() {
         {offerings
           ?.sort((a, b) => parseInt(a.order) - parseInt(b.order))
           .map((offering, i) => (
-            <div
-              key={offering.title}
-              className={`border-t border-stone-200 py-10 grid md:grid-cols-[1fr_auto] gap-6 items-start animate-fade-in`}
-              style={{ animationDelay: `${0.1 * (i + 1)}s` }}
-            >
-              <div>
-                <h2 className="text-2xl font-medium mb-3 text-foreground">
-                  {offering.title}
-                </h2>
-                <p className="leading-relaxed max-w-lg">
-                  {offering.shortDescription}
-                </p>
-                {offering.pricing?.length && offering.pricing.length > 1 ? (
-                  <ul className="mt-4 flex flex-col md:flex-row gap-2 justify-between w-full">
-                    {offering.pricing.map((priceOption) => (
-                      <li key={priceOption._key} className="border p-2 w-full">
-                        <div className="flex flex-col mb-1">
-                          <span className="text-lg text-stone-600">
-                            {priceOption.amount
-                              ? `${priceOption.amount} ${priceOption.currency || "$"}`
-                              : ""}
-                          </span>
-                          <span className="font-medium text-sm uppercase tracking-widest text-stone-600">
-                            {priceOption.label}
-                          </span>
-                        </div>
-                        <span>{priceOption.description}</span>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-                {offering.pricing?.length && offering.pricing.length === 1 ? (
-                  <span className="font-medium text-sm uppercase tracking-widest text-stone-600">
-                    {offering.pricing.map((priceOption) => priceOption.label)}
-                  </span>
-                ) : null}
-              </div>
-              <span className="text-sm text-primary uppercase tracking-widest whitespace-nowrap">
-                {offering.duration}
-              </span>
-            </div>
+            <OfferingCard key={offering._id} data={offering} i={i} />
           ))}
         <p
           className="border-t border-stone-200 pt-10 mb-8 text-lg leading-relaxed animate-fade-in"
