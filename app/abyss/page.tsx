@@ -13,6 +13,8 @@ export default async function PortfolioPage() {
     getPortfolioPage(),
     getPortfolioWorks(isEnabled),
   ]);
+  console.log("Portfolio Page Data: ", pageData);
+  console.log("All Works: ", allWorks);
   return (
     <div className="flex flex-col items-center justify-center gap-10 mt-16">
       <div className="max-w-7xl mx-auto w-full px-4">
