@@ -31,7 +31,7 @@ const creativeBlockComponents = {
               .width(width)
               .height(height)
               .url()}
-            alt={value.alt}
+            alt={value.alt || "Creative Block Image"}
             width={width}
             height={height}
             loading="eager"
