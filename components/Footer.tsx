@@ -12,17 +12,17 @@ export default function Footer({
       <FlowerBlue className="w-20 h-20 opacity-30" />
       <div className="flex flex-col-reverse justify-center items-center md:flex-row md:justify-between w-full">
         <div className="w-[85px]"></div>
-        <div>{currentYear} &copy; ponoyamoya.com</div>
+        <div>{currentYear} &copy; moyabyssal.com</div>
         <div className="flex gap-2">
           <a
-            href="https://www.instagram.com/pono.ya.moya"
+            href="https://www.instagram.com/moyabyssal"
             target="_blank"
             rel="noreferrer"
           >
             IG
           </a>
           {"|"}
-          <a href="mailto:info@ponoyamoya.com">EMAIL</a>
+          <a href="mailto:info@moyabyssal.com">EMAIL</a>
         </div>
       </div>
     </footer>

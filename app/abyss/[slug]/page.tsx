@@ -21,10 +21,10 @@ export default async function PortfolioPage({
     <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8 mx-auto">
       <div className="max-w-5xl w-full">
         <Link
-          href="/practice"
+          href="/abyss"
           className="hover:underline mb-12 inline-block uppercase text-xs"
         >
-          &larr; Practice
+          &larr; Abyss
         </Link>
         <div className="flex justify-between items-center gap-4 w-full text-xs mb-4">
           <div className="flex items-center gap-4 uppercase">
