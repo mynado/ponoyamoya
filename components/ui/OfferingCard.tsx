@@ -22,16 +22,14 @@ export default function OfferingCard({
         <h2 className="text-2xl font-medium mb-3 text-foreground">
           {data.title}
         </h2>
-        <p className="leading-relaxed max-w-lg text-sm mb-4">
-          {data.shortDescription}
-        </p>
+        <p className="leading-relaxed max-w-lg mb-4">{data.shortDescription}</p>
         {data.body?.length ? (
           <div
             className="animate-fade-in mb-4"
             style={{ animationDelay: "0.15s" }}
           >
             {isExtended && data.body.length > 1 ? (
-              <div className="leading-relaxed max-w-lg text-sm">
+              <div className="leading-relaxed max-w-lg">
                 {data.body.map((block, i) => (
                   <p key={i}>{block.children[0].text}</p>
                 ))}
@@ -54,12 +52,12 @@ export default function OfferingCard({
                 className="border p-2 w-full bg-spiritwhite"
               >
                 <div className="flex flex-col mb-1">
-                  <span className="text-lg text-foreground font-medium font-display">
+                  <span className="text-lg text-foreground font-semibold font-display">
                     {priceOption.amount
                       ? `${priceOption.amount} ${priceOption.currency || "$"}`
                       : ""}
                   </span>
-                  <span className="font-medium text-sm uppercase tracking-widest text-spiritred">
+                  <span className="font-sm text-sm uppercase tracking-widest text-spiritred">
                     {priceOption.label}
                   </span>
                 </div>

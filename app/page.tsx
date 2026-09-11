@@ -7,12 +7,12 @@ const Home = () => {
       <div className="flex flex-col md:flex-row gap-2">
         <Link
           href="/ndumba"
-          className="group relative border-1 border-stone-200 p-6 w-full bg-spiritblue/10 text-spiritblack md:bg-transparent md:w-1/2 h-auto md:mb-0 hover:bg-spiritblue/10 hover:text-spiritblue! transition-colors duration-300 max-w-[492px]"
+          className="group relative border border-stone-200 p-6 w-full bg-spiritblue/10 text-spiritblack md:bg-transparent md:w-1/2 h-auto md:mb-0 hover:bg-spiritblue/10 hover:text-spiritblue! transition-colors duration-300 max-w-[492px]"
         >
           <div className="p-6 md:text-right flex flex-col justify-center gap-2 h-full">
             <div className="h-[2px] w-10 bg-spiritblue mb-8 md:self-end"></div>
             <h2 className={`text-4xl font-bold group-hover:text-spiritblue`}>
-              Ndumba
+              Moya
             </h2>
             <p className="text-lg uppercase text-stone-600">
               ancestral and spiritual practice
@@ -25,12 +25,12 @@ const Home = () => {
         </Link>
         <Link
           href="/archive"
-          className="group relative border-1 border-stone-200 p-6 w-full bg-spiritred/10 text-spiritblack md:bg-transparent md:w-1/2 h-auto md:mb-0 hover:bg-spiritred/10 hover:text-spiritred! transition-colors duration-300 max-w-[492px]"
+          className="group relative border border-stone-200 p-6 w-full bg-spiritred/10 text-spiritblack md:bg-transparent md:w-1/2 h-auto md:mb-0 hover:bg-spiritred/10 hover:text-spiritred! transition-colors duration-300 max-w-[492px]"
         >
           <div className="p-6 flex flex-col justify-center gap-2 h-full">
             <div className="h-[2px] w-10 bg-spiritred mb-8"></div>
             <h2 className={`text-4xl font-bold group-hover:text-spiritred`}>
-              Archive
+              Abyss
             </h2>
             <p className="text-lg uppercase text-stone-600">
               creative and artistic practice

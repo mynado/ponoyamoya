@@ -18,6 +18,14 @@ export interface ContactPageData {
   seo?: SeoData;
 }
 
+export interface OfferingsPageData {
+  _type: "offeringsPage";
+  title?: string;
+  intro?: PortableTextBlock[];
+  sections?: PageSection[];
+  seo?: SeoData;
+}
+
 export interface IntroPageData {
   _type: string;
   title?: string;
@@ -35,4 +43,11 @@ export interface SiteSettings {
   socialLinks?: { platform: string; url: string }[];
   footerText?: string;
   defaultSeo?: SeoData;
+}
+
+export interface PageSection {
+  _key: string;
+  heading: string;
+  layout: "single" | "two_col";
+  content: { _key: string; text: PortableTextBlock[] }[];
 }

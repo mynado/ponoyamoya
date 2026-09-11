@@ -1,8 +1,8 @@
 import { client, getClient } from "../client";
-import { IntroPageData } from "../types/index";
+import { OfferingsPageData } from "../types/index";
 import { Offering } from "../types/offering";
 
-export async function getOfferingsPageIntro(): Promise<IntroPageData | null> {
+export async function getOfferingsPageIntro(): Promise<OfferingsPageData | null> {
   return client
     .fetch(
       `*[_type == "offeringsPage"][0]`,
