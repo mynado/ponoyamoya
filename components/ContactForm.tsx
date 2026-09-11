@@ -88,7 +88,42 @@ export default function ContactForm({
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const isValid = Object.values(formData).every((field) => !field.isError);
+    // Validate all required fields before sending
+    const validateEmail = (email: string) =>
+      /^\S+@\S+\.\S+$/.test(email.trim());
+
+    const messageMinLength = 10;
+
+    const newFormData: FormData = {
+      reason: {
+        value: formData.reason.value,
+        isError: formData.reason.value.trim() === "",
+      },
+      other: {
+        value: formData.other.value,
+        isError:
+          formData.reason.value === "other" &&
+          formData.other.value.trim() === "",
+      },
+      name: {
+        value: formData.name.value,
+        isError: formData.name.value.trim() === "",
+      },
+      email: {
+        value: formData.email.value,
+        isError:
+          formData.email.value.trim() === "" ||
+          !validateEmail(formData.email.value),
+      },
+      message: {
+        value: formData.message.value,
+        isError: formData.message.value.trim().length < messageMinLength,
+      },
+    };
+
+    setFormData(newFormData);
+
+    const isValid = Object.values(newFormData).every((field) => !field.isError);
     console.log("Form validation result:", isValid);
     if (!isValid) {
       setIsError(true);
@@ -172,7 +207,6 @@ export default function ContactForm({
             value={formData.other.value}
             onChange={onInputChange}
             labelText="Specify reason"
-            required
             error={{
               isError: !isSuccess && formData.other.isError,
               message: "Please provide a reason.",
