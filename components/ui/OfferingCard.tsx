@@ -31,9 +31,6 @@ export default function OfferingCard({
           >
             {isExtended && data.body.length > 1 ? (
               <div className="leading-relaxed max-w-lg">
-                {/* {data.body.map((block, i) => (
-                  <p key={i}>{block.children[0].text}</p>
-                ))} */}
                 <PortableText value={data.body} />
               </div>
             ) : null}
