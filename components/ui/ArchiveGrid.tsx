@@ -35,7 +35,7 @@ export default function ArchiveGrid({ items = [] }: ArchiveGridProps) {
         return (
           <Link
             key={item.title}
-            href={`/archive/${item.slug.current}`}
+            href={`/abyss/${item.slug.current}`}
             className={clsx(
               "relative group overflow-hidden rounded-sm animate-fade-in",
               layout,

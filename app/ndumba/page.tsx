@@ -19,7 +19,7 @@ export default async function NdumbaPage() {
       <div className="max-w-(--breakpoint-md) mx-auto w-full px-4 mb-4">
         <div className="h-0.5 w-10 bg-spiritblue mb-8"></div>
         <h1 className="text-4xl md:text-5xl font-medium mb-6 text-foreground animate-fade-in">
-          {pageData?.title || "Ndumba"}
+          {pageData?.title || "ndumba"}
         </h1>
         <div
           className="leading-relaxed animate-fade-in text-lg"

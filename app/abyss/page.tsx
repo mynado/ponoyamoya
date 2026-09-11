@@ -6,7 +6,7 @@ import {
 import { PortableText } from "next-sanity";
 import { draftMode } from "next/headers";
 
-export default async function PracticePage() {
+export default async function PortfolioPage() {
   const { isEnabled } = await draftMode();
   console.log("Draft Mode Enabled:", isEnabled);
   const [pageData, allWorks] = await Promise.all([
@@ -18,7 +18,7 @@ export default async function PracticePage() {
       <div className="max-w-7xl mx-auto w-full px-4">
         <div className="h-0.5 w-10 bg-spiritred mb-8" />
         <h1 className="text-4xl md:text-5xl font-medium mb-6">
-          {pageData?.title || "Archive"}
+          {pageData?.title || "abyss"}
         </h1>
         {pageData?.intro ? (
           <PortableText value={pageData.intro} />

@@ -5,16 +5,16 @@ import { draftMode } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export default async function PracticePage({
+export default async function PortfolioPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
   const { isEnabled } = await draftMode();
-  console.log("Practice Page Slug:", slug, "Draft Mode Enabled:", isEnabled);
+  console.log("Archive Page Slug:", slug, "Draft Mode Enabled:", isEnabled);
   const pageData = await getPortfolioWorkBySlug(slug, isEnabled);
-  console.log("Practice Post Data: ", pageData);
+  console.log("Portfolio Post Data: ", pageData);
   if (!pageData) notFound();
   // TODO: Arrow icon
   return (
