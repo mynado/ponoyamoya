@@ -15,7 +15,7 @@ export default async function NdumbaPage() {
 
   console.log("offerings", offerings, "pageData", pageData);
   return (
-    <div className="flex flex-col items-center justify-center gap-20 mt-16">
+    <div className="flex flex-col items-center justify-center gap-12 mt-16">
       <div className="max-w-(--breakpoint-md) mx-auto w-full px-4 mb-4">
         <div className="h-0.5 w-10 bg-spiritblue mb-8"></div>
         <h1 className="text-4xl md:text-5xl font-medium mb-6 text-foreground animate-fade-in">
@@ -31,27 +31,26 @@ export default async function NdumbaPage() {
             "Coming soon..."
           )}
         </div>
-        <div
-          className="flex flex-col md:flex-row gap-12 mt-12 animate-fade-in"
-          style={{ animationDelay: "0.2s" }}
-        >
-          {pageData?.sections?.map((section, i) => (
-            <section key={section._key} className="flex flex-col gap-6">
-              <div
-                className={clsx(
-                  "h-0.5 w-10 mb-4",
-                  i === 0 ? "bg-spiritred" : "bg-spirityellow",
-                )}
-              ></div>
-              <h2 className="font-display text-2xl mb-0">{section.heading}</h2>
-              {section.content.map((col) => (
-                <div key={col._key} className="prose text-md">
-                  <PortableText value={col.text} />
-                </div>
-              ))}
-            </section>
-          ))}
-        </div>
+        {pageData?.sections?.map((section, i) => (
+          <section
+            key={section._key}
+            className="mt-12 animate-fade-in mb-4 w-full"
+            style={{ animationDelay: `${0.1 * (i + 1)}s` }}
+          >
+            <div
+              className={clsx(
+                "h-0.5 w-10 mb-8",
+                i === 0 ? "bg-spiritred" : "bg-spirityellow",
+              )}
+            ></div>
+            <h2 className="font-display text-2xl">{section.heading}</h2>
+            {section.content.map((col) => (
+              <div key={col._key} className="prose text-md w-full">
+                <PortableText value={col.text} />
+              </div>
+            ))}
+          </section>
+        ))}
       </div>
       <div className="max-w-(--breakpoint-md) mx-auto w-full px-4">
         {offerings

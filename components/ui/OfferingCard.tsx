@@ -3,6 +3,7 @@ import { Offering } from "@/lib/sanity/types/offering";
 import Button from "./Button";
 import { useState } from "react";
 import Link from "next/dist/client/link";
+import { PortableText } from "next-sanity";
 
 export default function OfferingCard({
   data,
@@ -30,9 +31,10 @@ export default function OfferingCard({
           >
             {isExtended && data.body.length > 1 ? (
               <div className="leading-relaxed max-w-lg">
-                {data.body.map((block, i) => (
+                {/* {data.body.map((block, i) => (
                   <p key={i}>{block.children[0].text}</p>
-                ))}
+                ))} */}
+                <PortableText value={data.body} />
               </div>
             ) : null}
             <Button
@@ -45,11 +47,11 @@ export default function OfferingCard({
           </div>
         ) : null}
         {data.pricing?.length && data.pricing.length > 1 ? (
-          <ul className="mt-4 flex flex-col md:flex-row gap-2 justify-between w-full">
+          <ul className="mt-4 flex flex-col md:flex-row md:flex-wrap gap-2 justify-between w-full">
             {data.pricing.map((priceOption) => (
               <li
                 key={priceOption._key}
-                className="border p-2 w-full bg-spiritwhite"
+                className="border p-2 w-full bg-spiritwhite md:max-w-[calc(50%-0.5rem)] flex flex-col gap-1"
               >
                 <div className="flex flex-col mb-1">
                   <span className="text-lg text-foreground font-semibold font-display">
