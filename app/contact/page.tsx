@@ -1,5 +1,5 @@
 import ContactForm from "@/components/ContactForm";
-import { getContactPage } from "@/lib/sanity/queries/index";
+import { getContactPage, getOfferings } from "@/lib/sanity/queries/index";
 import {
   PortableText,
   PortableTextBlock,
@@ -23,7 +23,11 @@ export default async function ContactPage({
   searchParams: { [key: string]: string | undefined };
 }) {
   const { subject } = await searchParams;
-  const pageData = await getContactPage();
+  const [pageData, offerings] = await Promise.all([
+    getContactPage(),
+    getOfferings(),
+  ]);
+  const selectedOffering = offerings?.find((offering) => offering.slug.current === subject);
   return (
     <div className="mt-16 flex flex-col w-full items-center justify-center gap-4">
       <div className="max-w-(--breakpoint-md) mx-auto w-full px-4 prose">
@@ -40,7 +44,7 @@ export default async function ContactPage({
         )}
       </div>
       <div className="max-w-(--breakpoint-md) mx-auto w-full mt-8 px-4">
-        <ContactForm subject={subject} />
+        <ContactForm selectedOffering={selectedOffering} />
       </div>
     </div>
   );

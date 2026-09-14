@@ -6,24 +6,29 @@ import TextArea from "./ui/TextArea";
 import InlineError from "./ui/InlineError";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import Button from "./ui/Button";
+import { Offering } from "@/lib/sanity/types/offering";
+import { clsx } from "clsx";
 
 type FormField = { value: string; isError: boolean };
+type FormFieldNumber = { value: number | null; isError: boolean };
 type FormData = {
   reason: FormField;
   other: FormField;
+  pricing: FormFieldNumber;
   name: FormField;
   email: FormField;
   message: FormField;
 };
 
 export default function ContactForm({
-  subject,
+  selectedOffering,
 }: {
-  subject: string | undefined;
+  selectedOffering: Offering | undefined;
 }) {
   const [formData, setFormData] = useState<FormData>({
-    reason: { value: subject ?? "", isError: false },
+    reason: { value: selectedOffering?.slug?.current ?? "", isError: false },
     other: { value: "", isError: false },
+    pricing: { value: null, isError: false },
     name: { value: "", isError: false },
     email: { value: "", isError: false },
     message: { value: "", isError: false },
@@ -35,13 +40,13 @@ export default function ContactForm({
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    if (subject) {
+    if (selectedOffering) {
       setFormData((prev) => ({
         ...prev,
-        reason: { value: subject, isError: false },
+        reason: { value: selectedOffering.slug.current, isError: false },
       }));
     }
-  }, [subject]);
+  }, [selectedOffering]);
 
   const dropdownOptions = [
     { value: "", label: "--- Select ---", disabled: true, hidden: true },
@@ -80,6 +85,18 @@ export default function ContactForm({
     setIsError(false);
   };
 
+  const onRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("Radio button changed:", e.target.name, e.target.value);
+    setFormData((prev) => ({
+      ...prev,
+      pricing: {
+        value: e.target.value ? parseFloat(e.target.value) : null,
+        isError: !e.target.validity.valid,
+      },
+    }));
+    setIsError(false);
+  };
+
   const onCloseSuccessMessage = () => {
     setShowSuccessMessage(false);
     setIsSuccess(false);
@@ -105,6 +122,10 @@ export default function ContactForm({
           formData.reason.value === "other" &&
           formData.other.value.trim() === "",
       },
+      pricing: {
+        value: formData.pricing.value,
+        isError: formData.pricing.value === null,
+      },
       name: {
         value: formData.name.value,
         isError: formData.name.value.trim() === "",
@@ -120,7 +141,7 @@ export default function ContactForm({
         isError: formData.message.value.trim().length < messageMinLength,
       },
     };
-
+    console.log("Validated form data:", newFormData);
     setFormData(newFormData);
 
     const isValid = Object.values(newFormData).every((field) => !field.isError);
@@ -141,6 +162,7 @@ export default function ContactForm({
         body: JSON.stringify({
           reason: formData.reason.value,
           other: formData.other.value,
+          pricing: formData.pricing.value,
           name: formData.name.value,
           email: formData.email.value,
           message: formData.message.value,
@@ -155,6 +177,7 @@ export default function ContactForm({
       setFormData({
         reason: { value: "", isError: false },
         other: { value: "", isError: false },
+        pricing: { value: null, isError: false },
         name: { value: "", isError: false },
         email: { value: "", isError: false },
         message: { value: "", isError: false },
@@ -169,7 +192,7 @@ export default function ContactForm({
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-[400px] w-full">
+    <div className="relative flex flex-col items-center justify-center min-h-100 w-full">
       {showSuccessMessage && (
         <div className="absolute left-4 right-4 p-4 bg-white shadow-md max-w-md rounded-md flex flex-col gap-4 justify-center mx-auto">
           <h3 className="text-spiritblue">Thanks for reaching out!</h3>
@@ -213,6 +236,51 @@ export default function ContactForm({
             }}
           />
         )}
+        {formData.reason.value === "consultations" && (
+          <fieldset>
+            <legend className="mb-4">Select a pricing option:</legend>
+            {selectedOffering?.pricing?.length &&
+            selectedOffering.pricing.length > 1 ? (
+              <ul className="flex flex-col md:flex-row md:flex-wrap gap-2 justify-between w-full">
+                {selectedOffering.pricing.map((priceOption) => (
+                  <li
+                    key={priceOption._key}
+                    className={clsx(
+                      "border p-2 w-full md:max-w-[calc(50%-0.5rem)] flex flex-col gap-1 transform transition-all duration-200 hover:cursor-pointer hover:scale-102",
+                      formData.pricing.value === priceOption.amount
+                        ? "bg-spirityellow/40 scale-102 border-spiritblue"
+                        : "bg-spiritwhite",
+                    )}
+                  >
+                    <input
+                      type="radio"
+                      id={priceOption._key}
+                      name="pricing"
+                      value={priceOption.amount}
+                      onChange={onRadioChange}
+                      checked={formData.pricing.value === priceOption.amount}
+                      className="opacity-0 absolute w-0 h-0"
+                    />
+                    <label
+                      htmlFor={priceOption._key}
+                      className="flex flex-col gap-2"
+                    >
+                      <span className="text-lg text-foreground font-semibold font-display">
+                        {priceOption.amount
+                          ? `${priceOption.amount} ${priceOption.currency || "$"}`
+                          : ""}
+                      </span>
+                      <span className="font-sm text-sm uppercase tracking-widest text-spiritred">
+                        {priceOption.label}
+                      </span>
+                      <span className="text-sm">{priceOption.description}</span>
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </fieldset>
+        )}
         <div className="flex flex-col sm:flex-row gap-4">
           <Input
             id="name"
@@ -254,10 +322,7 @@ export default function ContactForm({
           minLength={10}
         />
 
-        <Button
-          disabled={isSending || isSuccess}
-          className="w-max min-w-[150px] uppercase"
-        >
+        <Button disabled={isSending || isSuccess} className="w-full uppercase">
           {isSending ? (
             <LoadingSpinner
               width={20}
