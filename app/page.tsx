@@ -19,7 +19,7 @@ const Home = () => {
             </p>
             <p className="mt-4 leading-relaxed text-stone-500">
               Approaching holistic wellbeing through divination, and African
-              Traditional Medicine and ancestral knowlegde.
+              Traditional Medicine and ancestral knowledge.
             </p>
           </div>
         </Link>
