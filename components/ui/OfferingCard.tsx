@@ -4,6 +4,7 @@ import Button from "./Button";
 import { useState } from "react";
 import Link from "next/dist/client/link";
 import { PortableText } from "next-sanity";
+import { clsx } from "clsx";
 
 export default function OfferingCard({
   data,
@@ -16,7 +17,7 @@ export default function OfferingCard({
   return (
     <div
       key={data.title}
-      className={`border-t border-stone-200 py-10 grid md:grid-cols-[1fr_auto] gap-6 items-start animate-fade-in`}
+      className={`border-t border-stone-300 py-10 grid md:grid-cols-[1fr_auto] gap-6 items-start animate-fade-in`}
       style={{ animationDelay: `${0.1 * (i + 1)}s` }}
     >
       <div>
@@ -37,18 +38,27 @@ export default function OfferingCard({
             <Button
               type="button"
               typeStyle="tertiary"
+              className="uppercase text-xs tracking-widest my-8"
               onClick={() => setIsExtended(!isExtended)}
             >
               {isExtended ? "Read less" : "Read more"}
             </Button>
           </div>
         ) : null}
-        {data.pricing?.length && data.pricing.length > 1 ? (
+        {data.pricing?.length ? (
           <ul className="mt-4 flex flex-col md:flex-row md:flex-wrap gap-2 justify-between w-full">
             {data.pricing.map((priceOption) => (
               <li
                 key={priceOption._key}
-                className="border p-2 w-full bg-spiritwhite md:max-w-[calc(50%-0.5rem)] flex flex-col gap-1"
+                className={clsx(
+                  "border p-2 w-full bg-spiritwhite animate-fade-in",
+                  priceOption.type === "fixed"
+                    ? "md:max-w-[calc(50%-0.5rem)] flex flex-col gap-1"
+                    : "",
+                  priceOption.type === "inquiry" || priceOption.type === "free"
+                    ? "max-w-max flex items-center justify-center pt-3"
+                    : "",
+                )}
               >
                 <div className="flex flex-col mb-1">
                   <span className="text-lg text-foreground font-semibold font-display">
@@ -65,11 +75,6 @@ export default function OfferingCard({
             ))}
           </ul>
         ) : null}
-        {data.pricing?.length && data.pricing.length === 1 ? (
-          <span className="font-medium text-xs uppercase tracking-widest text-stone-600">
-            {data.pricing.map((priceOption) => priceOption.label)}
-          </span>
-        ) : null}
       </div>
       <div className="flex flex-col gap-4 items-end justify-between pt-2">
         <span className="text-sm text-primary uppercase tracking-widest whitespace-nowrap">
@@ -77,7 +82,7 @@ export default function OfferingCard({
         </span>
         <Link
           href={`/contact?subject=${data.slug.current}`}
-          className="uppercase border bg-spiritblue text-spiritwhite block py-2 px-4 w-max hover:border-spiritblue hover:opacity-90 transition-colors"
+          className="uppercase border bg-spiritblue text-spiritwhite py-2 px-4 w-max min-w-25 flex items-center justify-center hover:border-spiritblue hover:opacity-90 transition-colors"
         >
           Book
         </Link>

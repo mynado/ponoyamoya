@@ -24,4 +24,5 @@ export interface PricingOption {
   currency?: string;
   description?: string;
   label?: string;
+  type?: "fixed" | "inquiry" | "free" | "donation" | "scale";
 }
