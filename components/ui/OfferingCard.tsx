@@ -54,10 +54,7 @@ export default function OfferingCard({
                   "border p-2 w-full bg-spiritwhite animate-fade-in",
                   priceOption.type === "fixed"
                     ? "md:max-w-[calc(50%-0.5rem)] flex flex-col gap-1"
-                    : "",
-                  priceOption.type === "inquiry" || priceOption.type === "free"
-                    ? "max-w-max flex items-center justify-center pt-3"
-                    : "",
+                    : "max-w-max flex items-center justify-center pt-3",
                 )}
               >
                 <div className="flex flex-col mb-1">
@@ -66,7 +63,12 @@ export default function OfferingCard({
                       ? `${priceOption.amount} ${priceOption.currency || "$"}`
                       : ""}
                   </span>
-                  <span className="font-sm text-sm uppercase tracking-widest text-spiritred">
+                  <span
+                    className={clsx(
+                      "text-sm uppercase tracking-widest text-spiritred",
+                      priceOption.type === "fixed" ? "text-sm" : "text-xs",
+                    )}
+                  >
                     {priceOption.label}
                   </span>
                 </div>

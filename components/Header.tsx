@@ -21,7 +21,7 @@ export default function Header({
       <nav
         className={`w-full flex flex-col items-center justify-center pr-2 pl-4 md:px-4 fixed top-0 backdrop-blur-xs z-50`}
       >
-        <div className="flex justify-between items-center w-full">
+        <div className="flex justify-between items-center w-full py-4">
           <Link href="/">
             <div className="text-spiritblue text-lg text-bold logo">
               moyabyssal
@@ -33,22 +33,22 @@ export default function Header({
             <Button
               onClick={toggleMenu}
               typeStyle="tertiary"
-              className="flex flex-col justify-center items-center w-10 h-10 gap-[5px] focus:outline-none"
+              className="flex flex-col justify-center items-center w-10 h-10 gap-1.25 focus:outline-none"
               aria-label="Toggle menu"
             >
               <span
-                className={`block h-[2px] w-6 bg-spiritblue rounded-full transition-all duration-300 origin-center ${
-                  isOpen ? "rotate-45 translate-y-[7px]" : ""
+                className={`block h-0.5 w-6 bg-spiritblue rounded-full transition-all duration-300 origin-center ${
+                  isOpen ? "rotate-45 translate-y-1.75" : ""
                 }`}
               />
               <span
-                className={`block h-[2px] w-6 bg-spiritblue rounded-full transition-all duration-300 ${
+                className={`block h-0.5 w-6 bg-spiritblue rounded-full transition-all duration-300 ${
                   isOpen ? "opacity-0 scale-x-0" : ""
                 }`}
               />
               <span
-                className={`block h-[2px] w-6 bg-spiritblue rounded-full transition-all duration-300 origin-center ${
-                  isOpen ? "-rotate-45 -translate-y-[7px]" : ""
+                className={`block h-0.5 w-6 bg-spiritblue rounded-full transition-all duration-300 origin-center ${
+                  isOpen ? "-rotate-45 -translate-y-1.75" : ""
                 }`}
               />
             </Button>
@@ -61,13 +61,24 @@ export default function Header({
                 <Link href={item.path}>{item.label}</Link>
               </li>
             ))}
+            <li>
+              {" "}
+              <a
+                href="https://www.instagram.com/moyabyssal"
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm"
+              >
+                IG
+              </a>
+            </li>
           </ul>
         </div>
 
         {/* MOBILE OVERLAY */}
         <div
           className={`
-            sm:hidden fixed inset-0 top-10 z-50 bg-spiritblue
+            sm:hidden fixed inset-0 top-14 z-50 bg-spiritblue
             flex flex-col justify-between
             transition-all duration-500 ease-in-out
             ${
@@ -103,6 +114,31 @@ export default function Header({
                 </Link>
               </li>
             ))}
+            <li
+              key="instagram"
+              className={`
+                  transition-all duration-500
+                  ${
+                    isOpen
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-6"
+                  }
+                `}
+              style={{
+                transitionDelay: isOpen
+                  ? `${(navigation.length - 2) * 80 + 150}ms`
+                  : "0ms",
+              }}
+            >
+              <a
+                href="https://www.instagram.com/moyabyssal"
+                target="_blank"
+                rel="noreferrer"
+                className="text-white text-xl tracking-widest hover:opacity-60 transition-opacity duration-200"
+              >
+                IG
+              </a>
+            </li>
           </ul>
         </div>
       </nav>
