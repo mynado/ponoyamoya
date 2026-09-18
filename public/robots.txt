@@ -3,7 +3,7 @@ User-agent: *
 Disallow: /api/
 
 # Optional: sitemap for better indexing
-Sitemap: https://www.ponoyamoya.com/sitemap.xml
+Sitemap: https://www.moyabyssal.com/sitemap.xml
 
 # Optional: polite crawling
 # Crawl-delay: 10

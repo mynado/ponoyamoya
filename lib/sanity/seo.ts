@@ -18,8 +18,8 @@ export function buildMetadata({
     seo?.metaDescription ?? settings.defaultSeo?.metaDescription;
   const ogImage = seo?.ogImage ?? settings.defaultSeo?.ogImage;
   const url = slug
-    ? `https://ponoyamoya.com/${slug}`
-    : "https://ponoyamoya.com";
+    ? `https://moyabyssal.com/${slug}`
+    : "https://moyabyssal.com";
 
   return {
     title,
