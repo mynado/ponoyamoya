@@ -124,7 +124,9 @@ export default function ContactForm({
       },
       pricing: {
         value: formData.pricing.value,
-        isError: formData.pricing.value === null,
+        isError:
+          formData.reason.value === "consultations" &&
+          formData.pricing.value === null,
       },
       name: {
         value: formData.name.value,
