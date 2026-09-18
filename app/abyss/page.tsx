@@ -26,13 +26,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function PortfolioPage() {
   const { isEnabled } = await draftMode();
-  console.log("Draft Mode Enabled:", isEnabled);
   const [pageData, allWorks] = await Promise.all([
     getPortfolioPage(isEnabled),
     getPortfolioWorks(isEnabled),
   ]);
-  console.log("Portfolio Page Data: ", pageData);
-  console.log("All Works: ", allWorks);
   return (
     <div className="flex flex-col items-center justify-center gap-10 mt-16">
       <div className="max-w-7xl mx-auto w-full px-4">

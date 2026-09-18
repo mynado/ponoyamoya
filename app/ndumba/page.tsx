@@ -32,8 +32,6 @@ export default async function NdumbaPage() {
     getOfferingsPageIntro(isEnabled),
     getOfferings(isEnabled),
   ]);
-
-  console.log("offerings", offerings, "pageData", pageData);
   return (
     <div className="flex flex-col items-center justify-center gap-12 mt-16">
       <div className="max-w-(--breakpoint-md) mx-auto w-full px-4 mb-4">

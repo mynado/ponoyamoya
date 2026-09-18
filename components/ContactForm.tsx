@@ -8,6 +8,7 @@ import LoadingSpinner from "./ui/LoadingSpinner";
 import Button from "./ui/Button";
 import { Offering } from "@/lib/sanity/types/offering";
 import { clsx } from "clsx";
+import Close from "@/icons/close";
 
 type FormField = { value: string; isError: boolean };
 type FormFieldNumber = { value: number | null; isError: boolean };
@@ -86,7 +87,6 @@ export default function ContactForm({
   };
 
   const onRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("Radio button changed:", e.target.name, e.target.value);
     setFormData((prev) => ({
       ...prev,
       pricing: {
@@ -143,11 +143,9 @@ export default function ContactForm({
         isError: formData.message.value.trim().length < messageMinLength,
       },
     };
-    console.log("Validated form data:", newFormData);
     setFormData(newFormData);
 
     const isValid = Object.values(newFormData).every((field) => !field.isError);
-    console.log("Form validation result:", isValid);
     if (!isValid) {
       setIsError(true);
       return;
@@ -157,7 +155,6 @@ export default function ContactForm({
     setIsError(false);
 
     try {
-      console.log("Attempting to send form data to /api/contact");
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -188,7 +185,6 @@ export default function ContactForm({
       console.error("Error submitting form:", error);
       setIsError(true);
     } finally {
-      console.log("Finished submission attempt");
       setIsSending(false);
     }
   };
@@ -196,14 +192,16 @@ export default function ContactForm({
   return (
     <div className="relative flex flex-col items-center justify-center min-h-100 w-full">
       {showSuccessMessage && (
-        <div className="absolute left-4 right-4 p-4 bg-white shadow-md max-w-md rounded-md flex flex-col gap-4 justify-center mx-auto">
-          <h3 className="text-spiritblue">Thanks for reaching out!</h3>
-          <p>
-            We&apos;ve received your message and will reply as soon as possible!
+        <div className="fixed right-4 bottom-4 p-4 bg-spiritwhite max-w-md shadow-md border border-stone-300 flex flex-col gap-2 justify-center">
+          <div className="flex flex-row justify-between items-center gap-4">
+            <p className="font-semibold mb-0">Message received </p>
+            <Button typeStyle="tertiary" onClick={onCloseSuccessMessage}>
+              <Close className="w-4 h-4" />
+            </Button>
+          </div>
+          <p className="text-sm font-semibold">
+            Thank you for reaching out! We will be in touch soon.
           </p>
-          <Button typeStyle="tertiary" onClick={onCloseSuccessMessage}>
-            Close
-          </Button>
         </div>
       )}
 

@@ -38,7 +38,7 @@ export default function OfferingCard({
             <Button
               type="button"
               typeStyle="tertiary"
-              className="uppercase text-xs tracking-widest my-8"
+              className="uppercase text-xs tracking-widest my-8 underline underline-offset-4 "
               onClick={() => setIsExtended(!isExtended)}
             >
               {isExtended ? "Read less" : "Read more"}
