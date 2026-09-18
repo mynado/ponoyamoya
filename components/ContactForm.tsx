@@ -51,7 +51,7 @@ export default function ContactForm({
   const dropdownOptions = [
     { value: "", label: "--- Select ---", disabled: true, hidden: true },
     { value: "connection-call", label: "Connection Call" },
-    { value: "consultations", label: "Consultations" },
+    { value: "consultation", label: "Consultation" },
     {
       value: "cleansing-and-home-fortification",
       label: "Cleansing and Home Fortification",
@@ -125,7 +125,7 @@ export default function ContactForm({
       pricing: {
         value: formData.pricing.value,
         isError:
-          formData.reason.value === "consultations" &&
+          formData.reason.value === "consultation" &&
           formData.pricing.value === null,
       },
       name: {
@@ -238,7 +238,7 @@ export default function ContactForm({
             }}
           />
         )}
-        {formData.reason.value === "consultations" && (
+        {formData.reason.value === "consultation" && (
           <fieldset>
             <legend className="mb-4">Select a pricing option:</legend>
             {selectedOffering?.pricing?.length &&
