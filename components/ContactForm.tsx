@@ -192,7 +192,7 @@ export default function ContactForm({
   return (
     <div className="relative flex flex-col items-center justify-center min-h-100 w-full">
       {showSuccessMessage && (
-        <div className="z-50fixed right-4 bottom-4 p-4 bg-spiritwhite max-w-md shadow-md border border-stone-300 flex flex-col gap-2 justify-center">
+        <div className="z-50 fixed right-4 bottom-4 p-4 bg-spiritwhite max-w-md shadow-md border border-stone-300 flex flex-col gap-2 justify-center">
           <div className="flex flex-row justify-between items-center gap-4">
             <p className="font-semibold mb-0">Message received </p>
             <Button typeStyle="tertiary" onClick={onCloseSuccessMessage}>
