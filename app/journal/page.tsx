@@ -25,7 +25,7 @@ export default async function Journal() {
         ) : (
           "Coming soon..."
         )}
-        {allPosts ? (
+        {allPosts && allPosts.length > 0 ? (
           <ul className="mt-8">
             {allPosts.map((post: JournalPostPreview | JournalPost) => (
               <li key={post._id} className="my-12">
@@ -41,7 +41,7 @@ export default async function Journal() {
             ))}
           </ul>
         ) : (
-          <p>Could not load content</p>
+          <p className="my-12 w-full text-center">Could not load content</p>
         )}
       </div>
     </div>

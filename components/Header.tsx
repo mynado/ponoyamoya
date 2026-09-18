@@ -11,6 +11,7 @@ export default function Header({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const navigation = settings?.navigation || [];
+  const socialLinks = settings?.socialLinks || [];
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -61,17 +62,18 @@ export default function Header({
                 <Link href={item.path}>{item.label}</Link>
               </li>
             ))}
-            <li>
-              {" "}
-              <a
-                href="https://www.instagram.com/moyabyssal"
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm"
-              >
-                IG
-              </a>
-            </li>
+            {socialLinks.map((link) => (
+              <li key={link.platform}>
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="uppercase text-sm"
+                >
+                  {link.platform}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -114,9 +116,10 @@ export default function Header({
                 </Link>
               </li>
             ))}
-            <li
-              key="instagram"
-              className={`
+            {socialLinks.map((link, index) => (
+              <li
+                key={link.platform}
+                className={`
                   transition-all duration-500
                   ${
                     isOpen
@@ -124,21 +127,22 @@ export default function Header({
                       : "opacity-0 translate-y-6"
                   }
                 `}
-              style={{
-                transitionDelay: isOpen
-                  ? `${(navigation.length - 2) * 80 + 150}ms`
-                  : "0ms",
-              }}
-            >
-              <a
-                href="https://www.instagram.com/moyabyssal"
-                target="_blank"
-                rel="noreferrer"
-                className="text-white text-xl tracking-widest hover:opacity-60 transition-opacity duration-200"
+                style={{
+                  transitionDelay: isOpen
+                    ? `${(navigation.length + index) * 80 + 150}ms`
+                    : "0ms",
+                }}
               >
-                IG
-              </a>
-            </li>
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-white text-2xl tracking-widest hover:opacity-60 transition-opacity duration-200"
+                >
+                  {link.platform}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </nav>
