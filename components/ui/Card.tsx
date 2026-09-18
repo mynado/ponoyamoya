@@ -29,16 +29,15 @@ export default function Card({
             {postData.tags[0].label}
           </span>
         )}
-        <span className="text-gray-600">
-          {new Date(
-            postData.publishedAt ? postData.publishedAt : "",
-          ).toLocaleDateString("en-SE", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </span>
-        <span className="text-gray-600">Share</span>
+        {postData.publishedAt && (
+          <span className="text-gray-600 text-sm">
+            {new Date(postData.publishedAt).toLocaleDateString("en-SE", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </span>
+        )}
       </div>
       {children}
     </article>

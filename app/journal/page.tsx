@@ -11,6 +11,8 @@ import { JournalPost, JournalPostPreview } from "@/lib/sanity/types/index";
 import Card from "@/components/ui/Card";
 import { buildMetadata } from "@/lib/sanity/seo";
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
+// import Image from "next/image";
+// import { urlFor } from "@/lib/sanity/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [pageData, settings] = await Promise.all([
@@ -29,7 +31,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Journal() {
   const { isEnabled } = await draftMode();
-  console.log("Draft Mode Enabled:", isEnabled);
   const [pageData, allPosts] = await Promise.all([
     getJournalPage(),
     getJournalPosts(isEnabled),
@@ -51,12 +52,33 @@ export default async function Journal() {
             {allPosts.map((post: JournalPostPreview | JournalPost) => (
               <li key={post._id} className="my-12">
                 <Card postData={post}>
-                  <Link href={`/journal/${post.slug.current}`}>
-                    <h2 className="text-2xl md:text-3xl font-medium my-4 text-foreground group-hover:text-primary transition-colors">
-                      {post.title}
-                    </h2>
-                  </Link>
-                  <div>{post.excerpt && <p>{stegaClean(post.excerpt)}</p>}</div>
+                  <div className="flex flex-col md:flex-row gap-4 items-start">
+                    {/* {post.coverImage && (
+                      <Image
+                        src={urlFor(post.coverImage)
+                          .width(400)
+                          .height(400)
+                          .url()}
+                        alt={post.coverImage.alt ? post.coverImage.alt : ""}
+                        width={200}
+                        height={200}
+                        loading="eager"
+                        className="w-full md:w-stretch h-stretch object-cover group-hover:scale-105 transition-transform duration-700"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        priority
+                      />
+                    )} */}
+                    <div>
+                      <Link href={`/journal/${post.slug.current}`}>
+                        <h2 className="text-2xl md:text-3xl font-medium text-foreground group-hover:text-primary transition-colors">
+                          {post.title}
+                        </h2>
+                      </Link>
+                      <div>
+                        {post.excerpt && <p>{stegaClean(post.excerpt)}</p>}
+                      </div>
+                    </div>
+                  </div>
                 </Card>
               </li>
             ))}
