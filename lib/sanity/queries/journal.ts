@@ -1,4 +1,4 @@
-import { client, getClient } from "../client";
+import { getClient } from "../client";
 import {
   JournalPageData,
   JournalPost,
