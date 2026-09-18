@@ -5,12 +5,16 @@ import {
   JournalPostPreview,
 } from "../types/index";
 
-export async function getJournalPage(): Promise<JournalPageData | null> {
-  return client
+export async function getJournalPage(
+  isPreview: boolean,
+): Promise<JournalPageData | null> {
+  return getClient(isPreview)
     .fetch(
       `*[_type == "journalPage"][0]`,
       {},
-      { next: { tags: ["journalPage"] } },
+      isPreview
+        ? { perspective: "drafts", useCdn: false }
+        : { next: { tags: ["journalPage"] } },
     )
     .catch((error) => {
       console.error("Error fetching journal page:", error);

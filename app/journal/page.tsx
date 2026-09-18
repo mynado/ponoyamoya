@@ -15,8 +15,9 @@ import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 // import { urlFor } from "@/lib/sanity/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const { isEnabled } = await draftMode();
   const [pageData, settings] = await Promise.all([
-    getJournalPage(),
+    getJournalPage(isEnabled),
     getSiteSettings(),
   ]);
 
@@ -32,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Journal() {
   const { isEnabled } = await draftMode();
   const [pageData, allPosts] = await Promise.all([
-    getJournalPage(),
+    getJournalPage(isEnabled),
     getJournalPosts(isEnabled),
   ]);
   // TODO: fix journalPost type
