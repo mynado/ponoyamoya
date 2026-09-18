@@ -1,9 +1,10 @@
 import { getAboutPage } from "@/lib/sanity/queries/index";
 import { PortableText } from "next-sanity";
+import { draftMode } from "next/dist/server/request/draft-mode";
 
 export default async function AboutPage() {
-  const pageData = await getAboutPage();
-  console.log("pageData", pageData);
+  const { isEnabled } = await draftMode();
+  const pageData = await getAboutPage(isEnabled);
 
   return (
     <div className="mt-16 p-4 flex flex-col w-full items-center justify-center gap-8">

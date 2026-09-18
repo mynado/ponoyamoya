@@ -5,12 +5,14 @@ import {
 } from "@/lib/sanity/queries/index";
 import clsx from "clsx";
 import { PortableText } from "next-sanity";
+import { draftMode } from "next/dist/server/request/draft-mode";
 import Link from "next/link";
 
 export default async function NdumbaPage() {
+  const { isEnabled } = await draftMode();
   const [pageData, offerings] = await Promise.all([
-    getOfferingsPageIntro(),
-    getOfferings(),
+    getOfferingsPageIntro(isEnabled),
+    getOfferings(isEnabled),
   ]);
 
   console.log("offerings", offerings, "pageData", pageData);

@@ -5,6 +5,7 @@ import {
   PortableTextBlock,
   PortableTextComponentProps,
 } from "next-sanity";
+import { draftMode } from "next/dist/server/request/draft-mode";
 
 const portableTextComponents = {
   listItem: {
@@ -21,11 +22,12 @@ export default async function ContactPage({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
-}) {
+  }) {
+  const { isEnabled } = await draftMode();
   const { subject } = await searchParams;
   const [pageData, offerings] = await Promise.all([
-    getContactPage(),
-    getOfferings(),
+    getContactPage(isEnabled),
+    getOfferings(isEnabled),
   ]);
   const selectedOffering = offerings?.find((offering) => offering.slug.current === subject);
   return (

@@ -10,7 +10,7 @@ export default async function PortfolioPage() {
   const { isEnabled } = await draftMode();
   console.log("Draft Mode Enabled:", isEnabled);
   const [pageData, allWorks] = await Promise.all([
-    getPortfolioPage(),
+    getPortfolioPage(isEnabled),
     getPortfolioWorks(isEnabled),
   ]);
   console.log("Portfolio Page Data: ", pageData);

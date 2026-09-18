@@ -1,16 +1,23 @@
-import { client, getClient } from "../client";
+import { getClient } from "../client";
 import {
   PortfolioPageData,
   PortfolioWork,
   PortfolioWorkPreview,
 } from "../types/index";
 
-export async function getPortfolioPage(): Promise<PortfolioPageData | null> {
-  return client
+export async function getPortfolioPage(
+  isPreview: boolean,
+): Promise<PortfolioPageData | null> {
+  return getClient(isPreview)
     .fetch(
       `*[_type == "portfolioPage"][0]`,
       {},
-      { next: { tags: ["portfolioPage"] } },
+      isPreview
+        ? {
+            perspective: "drafts",
+            useCdn: false,
+          }
+        : { next: { tags: ["portfolioPage"] } },
     )
     .catch((error) => {
       console.error("Error fetching practice page:", error);
