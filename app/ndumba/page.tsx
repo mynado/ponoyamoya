@@ -2,11 +2,29 @@ import OfferingCard from "@/components/ui/OfferingCard";
 import {
   getOfferings,
   getOfferingsPageIntro,
+  getSiteSettings,
 } from "@/lib/sanity/queries/index";
+import { buildMetadata } from "@/lib/sanity/seo";
 import clsx from "clsx";
 import { PortableText } from "next-sanity";
+import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 import { draftMode } from "next/dist/server/request/draft-mode";
 import Link from "next/link";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [pageData, settings] = await Promise.all([
+    getOfferingsPageIntro(false),
+    getSiteSettings(),
+  ]);
+
+  const siteSettings = settings ?? ({} as NonNullable<typeof settings>);
+
+  return buildMetadata({
+    seo: pageData?.seo,
+    settings: siteSettings,
+    slug: "ndumba",
+  });
+}
 
 export default async function NdumbaPage() {
   const { isEnabled } = await draftMode();

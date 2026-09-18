@@ -2,9 +2,30 @@ import { draftMode } from "next/headers";
 import Link from "next/link";
 import { stegaClean } from "@sanity/client/stega";
 import { PortableText } from "next-sanity";
-import { getJournalPage, getJournalPosts } from "@/lib/sanity/queries/index";
+import {
+  getJournalPage,
+  getJournalPosts,
+  getSiteSettings,
+} from "@/lib/sanity/queries/index";
 import { JournalPost, JournalPostPreview } from "@/lib/sanity/types/index";
 import Card from "@/components/ui/Card";
+import { buildMetadata } from "@/lib/sanity/seo";
+import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [pageData, settings] = await Promise.all([
+    getJournalPage(),
+    getSiteSettings(),
+  ]);
+
+  const siteSettings = settings ?? ({} as NonNullable<typeof settings>);
+
+  return buildMetadata({
+    seo: pageData?.seo,
+    settings: siteSettings,
+    slug: "ndumba",
+  });
+}
 
 export default async function Journal() {
   const { isEnabled } = await draftMode();

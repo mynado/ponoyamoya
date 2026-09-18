@@ -1,6 +1,23 @@
-import { getAboutPage } from "@/lib/sanity/queries/index";
+import { getAboutPage, getSiteSettings } from "@/lib/sanity/queries/index";
+import { buildMetadata } from "@/lib/sanity/seo";
 import { PortableText } from "next-sanity";
+import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 import { draftMode } from "next/dist/server/request/draft-mode";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [pageData, settings] = await Promise.all([
+    getAboutPage(false),
+    getSiteSettings(),
+  ]);
+
+  const siteSettings = settings ?? ({} as NonNullable<typeof settings>);
+
+  return buildMetadata({
+    seo: pageData?.seo,
+    settings: siteSettings,
+    slug: "ndumba",
+  });
+}
 
 export default async function AboutPage() {
   const { isEnabled } = await draftMode();

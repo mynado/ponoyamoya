@@ -1,10 +1,16 @@
 import ContactForm from "@/components/ContactForm";
-import { getContactPage, getOfferings } from "@/lib/sanity/queries/index";
+import {
+  getContactPage,
+  getOfferings,
+  getSiteSettings,
+} from "@/lib/sanity/queries/index";
+import { buildMetadata } from "@/lib/sanity/seo";
 import {
   PortableText,
   PortableTextBlock,
   PortableTextComponentProps,
 } from "next-sanity";
+import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 import { draftMode } from "next/dist/server/request/draft-mode";
 
 const portableTextComponents = {
@@ -18,18 +24,35 @@ const portableTextComponents = {
   },
 };
 
+export async function generateMetadata(): Promise<Metadata> {
+  const [pageData, settings] = await Promise.all([
+    getContactPage(false),
+    getSiteSettings(),
+  ]);
+
+  const siteSettings = settings ?? ({} as NonNullable<typeof settings>);
+
+  return buildMetadata({
+    seo: pageData?.seo,
+    settings: siteSettings,
+    slug: "ndumba",
+  });
+}
+
 export default async function ContactPage({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
-  }) {
+}) {
   const { isEnabled } = await draftMode();
   const { subject } = await searchParams;
   const [pageData, offerings] = await Promise.all([
     getContactPage(isEnabled),
     getOfferings(isEnabled),
   ]);
-  const selectedOffering = offerings?.find((offering) => offering.slug.current === subject);
+  const selectedOffering = offerings?.find(
+    (offering) => offering.slug.current === subject,
+  );
   return (
     <div className="mt-16 flex flex-col w-full items-center justify-center gap-4">
       <div className="max-w-(--breakpoint-md) mx-auto w-full px-4 prose">

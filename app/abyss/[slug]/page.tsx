@@ -1,9 +1,36 @@
 import CreativeBlock from "@/components/ui/CreativeBlock";
-import { getPortfolioWorkBySlug } from "@/lib/sanity/queries/index";
+import {
+  getPortfolioWorkBySlug,
+  getSiteSettings,
+} from "@/lib/sanity/queries/index";
+import { buildMetadata } from "@/lib/sanity/seo";
 import { CreativeBlockData } from "@/lib/sanity/types/index";
+import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const [work, settings] = await Promise.all([
+    getPortfolioWorkBySlug(slug, false),
+    getSiteSettings(),
+  ]);
+
+  const siteSettings = settings ?? ({} as NonNullable<typeof settings>);
+
+  if (!work) return {};
+
+  return buildMetadata({
+    seo: work.seo,
+    settings: siteSettings,
+    slug: `abyss/${slug}`,
+  });
+}
 
 export default async function PortfolioPage({
   params,
