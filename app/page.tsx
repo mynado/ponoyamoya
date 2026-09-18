@@ -33,7 +33,7 @@ const Home = () => {
               abyss
             </h2>
             <p className="text-lg uppercase text-stone-600">
-              creative and artistic
+              creative and artistic practice
             </p>
             <p className="mt-4 leading-relaxed text-stone-500">
               Past and ongoing experiments across craft, prose and other forms
