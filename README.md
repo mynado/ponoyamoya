@@ -1,4 +1,4 @@
-# Moya/Abyssal (formerly known as Pono ya Moya)
+# Moya/Abyssal (fka Pono ya Moya)
 
 A contemporary platform for spiritual practice, ancestral knowledge, creative work, and reflective writing. The site is structured around two primary branches: ndumba (ancestral and spiritual work) and abyss (creative practice), with journal, contact, and about pages supporting the broader platform.
 
