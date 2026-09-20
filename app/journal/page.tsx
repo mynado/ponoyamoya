@@ -8,11 +8,10 @@ import {
   getSiteSettings,
 } from "@/lib/sanity/queries/index";
 import { JournalPost, JournalPostPreview } from "@/lib/sanity/types/index";
-import Card from "@/components/ui/Card";
 import { buildMetadata } from "@/lib/sanity/seo";
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
-// import Image from "next/image";
-// import { urlFor } from "@/lib/sanity/utils";
+import Image from "next/image";
+import { urlFor } from "@/lib/sanity/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { isEnabled } = await draftMode();
@@ -52,35 +51,52 @@ export default async function Journal() {
           <ul className="mt-8">
             {allPosts.map((post: JournalPostPreview | JournalPost) => (
               <li key={post._id} className="my-12">
-                <Card postData={post}>
-                  <div className="flex flex-col md:flex-row gap-4 items-start">
-                    {/* {post.coverImage && (
-                      <Image
-                        src={urlFor(post.coverImage)
-                          .width(400)
-                          .height(400)
-                          .url()}
-                        alt={post.coverImage.alt ? post.coverImage.alt : ""}
-                        width={200}
-                        height={200}
-                        loading="eager"
-                        className="w-full md:w-stretch h-stretch object-cover group-hover:scale-105 transition-transform duration-700"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        priority
-                      />
-                    )} */}
-                    <div>
-                      <Link href={`/journal/${post.slug.current}`}>
-                        <h2 className="text-2xl md:text-3xl font-medium text-foreground group-hover:text-primary transition-colors">
+                <Link
+                  href={`/journal/${post.slug.current}`}
+                  className="group animate-fade-in"
+                >
+                  <article>
+                    <div className="flex flex-col md:flex-row gap-4 items-start">
+                      {post.coverImage && (
+                        <div className="w-full md:w-1/3 overflow-hidden">
+                          <Image
+                            src={urlFor(post.coverImage)
+                              .width(800)
+                              .height(800)
+                              .url()}
+                            alt={post.coverImage.alt ? post.coverImage.alt : ""}
+                            width={400}
+                            height={400}
+                            loading="eager"
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            priority
+                          />
+                        </div>
+                      )}
+                      <div className="flex flex-col gap-2">
+                        {post.publishedAt && (
+                          <span className="text-gray-600 text-sm">
+                            {new Date(post.publishedAt).toLocaleDateString(
+                              "en-SE",
+                              {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                              },
+                            )}
+                          </span>
+                        )}
+                        <h2 className="text-2xl md:text-3xl font-medium text-foreground group-hover:opacity-80 transition-colors mb-2">
                           {post.title}
                         </h2>
-                      </Link>
-                      <div>
-                        {post.excerpt && <p>{stegaClean(post.excerpt)}</p>}
+                        <div>
+                          {post.excerpt && <p>{stegaClean(post.excerpt)}</p>}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Card>
+                  </article>
+                </Link>
               </li>
             ))}
           </ul>
